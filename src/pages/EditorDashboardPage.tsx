@@ -22,6 +22,7 @@ import TacticalTrackingModal from '../components/modalComponents/TacticalTrackin
 import SocialListeningModal from '../components/modalComponents/SocialListeningModal';
 import OperationProgressModal from '../components/modalComponents/OperationProgressModal';
 import OperationMetricsModal from '../components/modalComponents/OperationMetricsModal';
+import AvisosTable from '../components/cochabamba/AvisosTable';
 
 export default function EditorDashboardPage() {
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
@@ -165,12 +166,7 @@ export default function EditorDashboardPage() {
           )}
 
           {activeTab === 'cochabamba' && (
-            <div className="glassmorphic-container p-8 h-[400px] flex items-center justify-center">
-              <div className="text-center">
-                <h2 className="text-2xl font-semibold text-white mb-4">Cochabamba</h2>
-                <p className="text-gray-400">Contenido de Cochabamba próximamente</p>
-              </div>
-            </div>
+            <AvisosTable />
           )}
         </div>
       </div>
