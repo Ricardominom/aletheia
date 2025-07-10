@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, BarChart3, Calendar, Building, Plus, Trash2, Users } from 'lucide-react';
-import CandidatoModal from './CandidatoModal';
+import CandidatoModal from './CandidatoModal.tsx';
 
 interface Candidato {
   id: string;
