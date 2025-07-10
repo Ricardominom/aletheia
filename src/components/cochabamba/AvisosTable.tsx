@@ -36,18 +36,13 @@ export default function AvisosTable() {
   ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Ordenar avisos por fecha de creación (más recientes primero)
-  const avisosOrdenados = [...avisos].sort((a, b) => 
-    b.fechaCreacion.getTime() - a.fechaCreacion.getTime()
-  );
-
   const handleAddAviso = (nuevoAviso: Omit<Aviso, 'id' | 'fechaCreacion'>) => {
     const aviso: Aviso = {
       ...nuevoAviso,
       id: Date.now().toString(),
       fechaCreacion: new Date()
     };
-    setAvisos([aviso, ...avisos]);
+    setAvisos([aviso, ...avisos]); // Agregar al inicio para mantener orden cronológico
   };
 
   const handleDeleteAviso = (id: string) => {
@@ -74,6 +69,11 @@ export default function AvisosTable() {
       year: 'numeric'
     }) + ' a las ' + hora;
   };
+
+  // Ordenar avisos por fecha de creación (más recientes primero)
+  const avisosOrdenados = [...avisos].sort((a, b) => 
+    b.fechaCreacion.getTime() - a.fechaCreacion.getTime()
+  );
 
   return (
     <>
