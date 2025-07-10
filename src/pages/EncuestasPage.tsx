@@ -22,16 +22,6 @@ export default function EncuestasPage() {
             Contenido de adversarios próximamente
           </p>
           
-          {/* Feature Preview Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-12 w-full max-w-md mx-auto">
-            
-            <div className="bg-card/50 border border-primary/20 rounded-lg p-6 hover:border-primary/40 transition-all duration-300">
-              <Calendar className="w-8 h-8 text-accent-pink mb-4" />
-              <h3 className="text-lg font-semibold text-white mb-2">Programación</h3>
-              <p className="text-gray-400 text-sm">Programación automática de encuestas periódicas</p>
-            </div>
-          </div>
-          
           {/* Coming Soon Message */}
           <div className="mt-12 text-center">
             <p className="text-gray-400">
