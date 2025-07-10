@@ -89,7 +89,7 @@ export default function Navbar() {
                       <Link
                         key={tab.name}
                         to={tab.path}
-                        className={\`flex items-center gap-1 px-3 h-4 text-xs font-medium transition-all duration-300 relative ${
+                        className={`flex items-center gap-1 px-3 h-4 text-xs font-medium transition-all duration-300 relative ${
                           isActiveTab
                             ? 'text-primary'
                             : 'text-gray-400 hover:text-gray-200'
