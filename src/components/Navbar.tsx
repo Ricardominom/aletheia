@@ -23,7 +23,7 @@ export default function Navbar() {
 
   // Dashboard sub-tabs
   const dashboardTabs = [
-    { name: 'Encuestas', icon: BarChart3, path: `${dashboardPath}?tab=encuestas` },
+    { name: 'Encuestas', icon: BarChart3, path: '/encuestas' },
     { name: 'Adversarios', icon: Users, path: `${dashboardPath}?tab=adversarios` },
     { name: 'Cochabamba', icon: MapIcon, path: `${dashboardPath}?tab=cochabamba` },
   ];
@@ -60,9 +60,11 @@ export default function Navbar() {
               <div className="flex items-center">
                 {dashboardTabs.map((tab) => {
                   const Icon = tab.icon;
-                  const isActiveTab = location.pathname.includes('/dashboard') && 
-                                     (location.search.includes(`tab=${tab.path.split('=')[1]}`) || 
-                                     (tab.path.includes('encuestas') && !location.search));
+                  const isActiveTab = tab.path.startsWith('/encuestas') 
+                    ? location.pathname === '/encuestas'
+                    : location.pathname.includes('/dashboard') && 
+                      (location.search.includes(`tab=${tab.path.split('=')[1]}`) || 
+                      (tab.path.includes('adversarios') && !location.search));
                   return (
                     <Link
                       key={tab.name}

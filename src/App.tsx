@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DashboardPage from './pages/DashboardPage';
 import EditorDashboardPage from './pages/EditorDashboardPage';
 import LoginPage from './pages/LoginPage';
+import EncuestasPage from './pages/EncuestasPage';
 import FinanzasPage from './pages/FinanzasPage';
 import JuridicoPage from './pages/JuridicoPage';
 import ComunicacionPage from './pages/ComunicacionPage';
@@ -25,6 +26,12 @@ function App() {
           <>
             <Navbar />
             <EditorDashboardPage />
+          </>
+        } />
+        <Route path="/encuestas" element={
+          <>
+            <Navbar />
+            <EncuestasPage />
           </>
         } />
         <Route path="/finanzas" element={
