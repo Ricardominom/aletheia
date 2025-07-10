@@ -57,7 +57,7 @@ export default function Navbar() {
             {/* Center - Navigation items */}
             <div className="flex items-center justify-center flex-1">
               {/* Dashboard sub-tabs - always visible */}
-              <div className="flex items-center mr-8">
+              <div className="flex items-center">
                 {dashboardTabs.map((tab) => {
                   const Icon = tab.icon;
                   const isActiveTab = location.pathname.includes('/dashboard') && 
@@ -81,7 +81,6 @@ export default function Navbar() {
                     </Link>
                   );
                 })}
-                <div className="w-px h-8 bg-primary/20 mx-4"></div>
               </div>
               
               {/* Regular navigation items */}
