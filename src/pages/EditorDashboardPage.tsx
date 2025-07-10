@@ -10,6 +10,7 @@ import SocialListening from '../components/SocialListening';
 import OperationProgress from '../components/OperationProgress';
 import OperationMetrics from '../components/OperationMetrics';
 import LogoutDialog from '../components/LogoutDialog';
+import CampaignOverview from '../components/CampaignOverview';
 import CochabambaPage from '../components/cochabamba/CochabambaPage';
 
 // Import all modal components
