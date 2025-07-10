@@ -22,7 +22,6 @@ export default function Navbar() {
   const dashboardPath = isEditorMode ? '/dashboard/editor' : '/dashboard';
 
   const navItems = [
-    { name: 'Jurídico', icon: Scale, path: '/juridico' },
     { name: 'Comunicación', icon: MessageSquare, path: '/comunicacion' },
     { name: 'Territorial', icon: MapPin, path: '/territorial' },
     { name: 'Estrategia', icon: Lightbulb, path: '/estrategia' },
