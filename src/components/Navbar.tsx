@@ -83,7 +83,7 @@ export default function Navbar() {
                     const isActiveTab = tab.path.startsWith('/encuestas') 
                       ? location.pathname === '/encuestas'
                       : location.pathname.includes('/dashboard') && 
-                        (location.search.includes(\`tab=${tab.path.split('=')[1]}`) || 
+                        (location.search.includes('tab=' + tab.path.split('=')[1]) || 
                         (tab.path.includes('adversarios') && !location.search));
                     return (
                       <Link
