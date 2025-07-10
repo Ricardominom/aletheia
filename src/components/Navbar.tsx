@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MessageSquare, MapPin, Home, LogOut, Lightbulb, BarChart3, Users, MapIcon } from 'lucide-react';
 import LogoutDialog from './LogoutDialog';
@@ -9,14 +9,6 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
   const setCurrentUser = useDashboardStore(state => state.setCurrentUser);
-  const [navbarHeight, setNavbarHeight] = useState(64); // Default height
-
-  // Calculate navbar height based on content
-  useEffect(() => {
-    // Always set a consistent height for editor mode
-    const isEditorMode = location.pathname.includes('/editor') || location.pathname === '/encuestas';
-    setNavbarHeight(isEditorMode ? 80 : 64); // 80px for editor (includes tabs), 64px for admin
-  }, [location.pathname]);
 
   const handleLogout = () => {
     setIsLogoutDialogOpen(false);
@@ -30,27 +22,72 @@ export default function Navbar() {
 
   // Determine if we're in editor mode
   const isEditorMode = location.pathname.includes('/editor');
-
-  const dashboardPath = '/dashboard';
+  const dashboardPath = isEditorMode ? '/dashboard/editor' : '/dashboard';
 
   // Dashboard sub-tabs
   const dashboardTabs = [
+    { name: 'Encuestas', icon: BarChart3, path: '/encuestas' },
     { name: 'Adversarios', icon: Users, path: `${dashboardPath}?tab=adversarios` },
-    { name: 'Cochabamba', icon: MapIcon, path: `${dashboardPath}?tab=cochabamba` }
+    { name: 'Cochabamba', icon: MapIcon, path: `${dashboardPath}?tab=cochabamba` },
   ];
 
   const navItems = [
     { name: 'Comunicación', icon: MessageSquare, path: '/comunicacion' },
-    { name: 'Territorial', icon: MapPin, path: '/territorial' }
+    { name: 'Territorial', icon: MapPin, path: '/territorial' },
+    { name: 'Estrategia', icon: Lightbulb, path: '/estrategia' },
   ];
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-primary/10">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col h-full">
-            {/* Main navbar row */}
-            <div className="flex items-center justify-between h-16">
+      <nav className="fixed top-0 left-0 right-0 h-16 bg-card/95 backdrop-blur-sm border-b border-primary/20 z-50">
+        <div className="container mx-auto h-full px-4">
+          <div className="flex items-center justify-between h-full">
+            {/* Left side - Home button */}
+            <Link
+              to={dashboardPath}
+              className={`flex items-center gap-2 px-4 h-full text-sm font-medium transition-all duration-300 relative ${
+                isActive(dashboardPath)
+                  ? 'text-primary'
+                  : 'text-gray-400 hover:text-gray-200'
+              }`}
+            >
+              <Home className="w-8 h-8" />
+              {isActive(dashboardPath) && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"></div>
+              )}
+            </Link>
+
+            {/* Center - Navigation items */}
+            <div className="flex items-center justify-center flex-1">
+              {/* Dashboard sub-tabs - always visible */}
+              <div className="flex items-center">
+                {dashboardTabs.map((tab) => {
+                  const Icon = tab.icon;
+                  const isActiveTab = tab.path.startsWith('/encuestas') 
+                    ? location.pathname === '/encuestas'
+                    : location.pathname.includes('/dashboard') && 
+                      (location.search.includes(`tab=${tab.path.split('=')[1]}`) || 
+                      (tab.path.includes('adversarios') && !location.search));
+                  return (
+                    <Link
+                      key={tab.name}
+                      to={tab.path}
+                      className={`flex items-center gap-2 px-5 h-full text-sm font-medium transition-all duration-300 relative ${
+                        isActiveTab
+                          ? 'text-primary'
+                          : 'text-gray-400 hover:text-gray-200'
+                      }`}
+                    >
+                      <Icon className="w-4 h-4" />
+                      {tab.name}
+                      {isActiveTab && (
+                        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"></div>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+              
               {/* Regular navigation items */}
               {navItems.map((item) => {
                 const Icon = item.icon;
@@ -73,39 +110,6 @@ export default function Navbar() {
                 );
               })}
             </div>
-            
-            {/* Dashboard sub-tabs row - only visible on dashboard pages */}
-            {(location.pathname.includes('/dashboard') || location.pathname === '/encuestas') && (
-              <div className="flex items-center justify-center h-4 border-t border-primary/10">
-                <div className="flex items-center">
-                  {dashboardTabs.map((tab) => {
-                    const Icon = tab.icon;
-                    const isActiveTab = tab.path.startsWith('/encuestas') 
-                      ? location.pathname === '/encuestas'
-                      : location.pathname.includes('/dashboard') && 
-                        (location.search.includes(`tab=${tab.path.split('=')[1]}`) || 
-                        (tab.path.includes('adversarios') && !location.search));
-                    return (
-                      <Link
-                        key={tab.name}
-                        to={tab.path}
-                        className={`flex items-center gap-1 px-3 h-4 text-xs font-medium transition-all duration-300 relative ${
-                          isActiveTab
-                            ? 'text-primary'
-                            : 'text-gray-400 hover:text-gray-200'
-                        }`}
-                      >
-                        <Icon className="w-3 h-3" />
-                        {tab.name}
-                        {isActiveTab && (
-                          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"></div>
-                        )}
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
 
             {/* Right side - Logout Button */}
             <button
