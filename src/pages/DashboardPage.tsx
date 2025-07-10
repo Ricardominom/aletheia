@@ -14,7 +14,10 @@ import OperationMetrics from '../components/OperationMetrics';
 export default function DashboardPage() {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('encuestas');
-  const setCurrentUser = useDashboardStore(state => state.setCurrentUser);
+  const { setCurrentUser, _hasHydrated } = useDashboardStore(state => ({
+    setCurrentUser: state.setCurrentUser,
+    _hasHydrated: state._hasHydrated
+  }));
 
   // Update active tab based on URL parameter
   useEffect(() => {
@@ -31,6 +34,24 @@ export default function DashboardPage() {
   useEffect(() => {
     setCurrentUser('admin');
   }, [setCurrentUser]);
+
+  // Show loading state until hydrated
+  if (!_hasHydrated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-bl from-[#4a5a64] from-15% via-[#121619] via-45% to-[#121619] relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-background/10 to-transparent opacity-50"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-background/20 via-transparent to-transparent"></div>
+        
+        <div className="pt-24 min-h-screen flex items-center justify-center">
+          <div className="glassmorphic-container p-8 text-center">
+            <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full mx-auto mb-4"></div>
+            <p className="text-gray-400">Cargando dashboard...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-bl from-[#4a5a64] from-15% via-[#121619] via-45% to-[#121619] relative">
       {/* Background overlay for additional depth */}

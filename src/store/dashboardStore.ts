@@ -5,6 +5,9 @@ interface DashboardState {
   // Current user info
   currentUser: 'admin' | 'editor' | null;
   
+  // Hydration state
+  _hasHydrated: boolean;
+  
   // Profile
   profile: {
     name: string;
@@ -90,6 +93,7 @@ interface DashboardState {
   updateOperationProgress: (data: DashboardState['operationProgress'][0]) => void;
   updateOperationMetrics: (data: DashboardState['operationMetrics'][0]) => void;
   resetToDefaults: () => void;
+  setHasHydrated: (state: boolean) => void;
 }
 
 // Default state factory
@@ -187,6 +191,7 @@ export const useDashboardStore = create<DashboardState>()(
     (set, get) => ({
       // Initial state
       currentUser: null,
+      _hasHydrated: false,
       ...createDefaultState(),
 
       // Actions
@@ -198,6 +203,12 @@ export const useDashboardStore = create<DashboardState>()(
           // For editor, they can modify the state
           // No need to reset, just track the current user
         }
+      },
+
+      setHasHydrated: (state) => {
+        set({
+          _hasHydrated: state
+        });
       },
 
       resetToDefaults: () => {
@@ -273,6 +284,9 @@ export const useDashboardStore = create<DashboardState>()(
         operationProgress: state.operationProgress,
         operationMetrics: state.operationMetrics,
       }),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
     }
   )
 );

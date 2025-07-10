@@ -2,7 +2,19 @@ import React from 'react';
 import { useDashboardStore } from '../store/dashboardStore';
 
 export default function OperationProgress() {
-  const operationProgress = useDashboardStore(state => state.operationProgress);
+  const { operationProgress, _hasHydrated } = useDashboardStore(state => ({
+    operationProgress: state.operationProgress,
+    _hasHydrated: state._hasHydrated
+  }));
+
+  // Don't render until hydrated
+  if (!_hasHydrated) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="animate-spin w-6 h-6 border-2 border-primary border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">

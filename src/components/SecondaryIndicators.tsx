@@ -2,7 +2,19 @@ import React from 'react';
 import { useDashboardStore } from '../store/dashboardStore';
 
 export default function SecondaryIndicators() {
-  const indicators = useDashboardStore(state => state.indicators);
+  const { indicators, _hasHydrated } = useDashboardStore(state => ({
+    indicators: state.indicators,
+    _hasHydrated: state._hasHydrated
+  }));
+
+  // Don't render until hydrated
+  if (!_hasHydrated) {
+    return (
+      <div className="glassmorphic-container p-5 h-[480px] animate-scale-in flex items-center justify-center">
+        <div className="animate-spin w-6 h-6 border-2 border-primary border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="glassmorphic-container p-5 h-[480px] animate-scale-in">
