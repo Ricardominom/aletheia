@@ -3,7 +3,7 @@ import { BarChart3, TrendingUp, Users, Calendar } from 'lucide-react';
 
 export default function EncuestasPage() {
   return (
-    <div className="min-h-screen bg-background pt-20 px-6">
+    <div className="min-h-screen bg-background pt-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="glassmorphic-container p-12 min-h-[600px] flex flex-col items-center justify-center text-center">
           {/* Background effects */}

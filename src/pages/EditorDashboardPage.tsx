@@ -68,7 +68,7 @@ export default function EditorDashboardPage() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-background/20 via-transparent to-transparent"></div>
 
       {/* Main content with padding to account for navbar */}
-      <div className="pt-20 p-4 lg:p-6">
+      <div className="pt-24 p-4 lg:p-6">
         <div className="max-w-[1920px] mx-auto space-y-4 relative">
           {/* Tab Content */}
           {activeTab === 'encuestas' && (

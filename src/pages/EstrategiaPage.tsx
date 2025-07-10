@@ -7,7 +7,7 @@ import DebateCard from '../components/estrategia/DebateCard';
 
 export default function EstrategiaPage() {
   return (
-    <div className="min-h-screen bg-background pt-20 px-6">
+    <div className="min-h-screen bg-background pt-24 px-6">
       <div className="max-w-[1920px] mx-auto grid grid-cols-3 gap-4">
         {/* First row - DayD and Strategy Planning */}
         <DayDCard />
