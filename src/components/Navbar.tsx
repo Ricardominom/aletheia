@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MessageSquare, MapPin, Home, LogOut, Lightbulb, BarChart3, Users, MapIcon } from 'lucide-react';
 import LogoutDialog from './LogoutDialog';
@@ -30,49 +30,27 @@ export default function Navbar() {
 
   // Determine if we're in editor mode
   const isEditorMode = location.pathname.includes('/editor');
-          <div className="flex flex-col h-full">
-            {/* Main navbar row */}
-            <div className="flex items-center justify-between h-16">
+
+  const dashboardPath = '/dashboard';
 
   // Dashboard sub-tabs
   const dashboardTabs = [
-                className={`flex items-center gap-2 px-4 h-16 text-sm font-medium transition-all duration-300 relative ${
     { name: 'Adversarios', icon: Users, path: `${dashboardPath}?tab=adversarios` },
-    { name: 'Cochabamba', icon: MapIcon, path: `${dashboardPath}?tab=cochabamba` },
+    { name: 'Cochabamba', icon: MapIcon, path: `${dashboardPath}?tab=cochabamba` }
   ];
 
   const navItems = [
     { name: 'Comunicación', icon: MessageSquare, path: '/comunicacion' },
-    { name: 'Territorial', icon: MapPin, path: '/territorial' },
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"></div>
+    { name: 'Territorial', icon: MapPin, path: '/territorial' }
   ];
 
   return (
     <>
-      <nav 
-                    : location.pathname.includes('/dashboard') && 
-                      (location.search.includes(`tab=${tab.path.split('=')[1]}`) || 
-                      (tab.path.includes('adversarios') && !location.search));
-                  return (
-                    <Link
-                      key={tab.name}
-                      to={tab.path}
-                      className={`flex items-center gap-2 px-5 h-16 text-sm font-medium transition-all duration-300 relative ${
-                        isActiveTab
-                          ? 'text-primary'
-                          : 'text-gray-400 hover:text-gray-200'
-                      }`}
-                    >
-                      <Icon className="w-4 h-4" />
-                      {tab.name}
-                      {isActiveTab && (
-                        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"></div>
-                      )}
-                    </Link>
-                  );
-                })}
-              </div>
-              
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-primary/10">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col h-full">
+            {/* Main navbar row */}
+            <div className="flex items-center justify-between h-16">
               {/* Regular navigation items */}
               {navItems.map((item) => {
                 const Icon = item.icon;
@@ -105,13 +83,13 @@ export default function Navbar() {
                     const isActiveTab = tab.path.startsWith('/encuestas') 
                       ? location.pathname === '/encuestas'
                       : location.pathname.includes('/dashboard') && 
-                        (location.search.includes(`tab=${tab.path.split('=')[1]}`) || 
+                        (location.search.includes(\`tab=${tab.path.split('=')[1]}`) || 
                         (tab.path.includes('adversarios') && !location.search));
                     return (
                       <Link
                         key={tab.name}
                         to={tab.path}
-                        className={`flex items-center gap-1 px-3 h-4 text-xs font-medium transition-all duration-300 relative ${
+                        className={\`flex items-center gap-1 px-3 h-4 text-xs font-medium transition-all duration-300 relative ${
                           isActiveTab
                             ? 'text-primary'
                             : 'text-gray-400 hover:text-gray-200'
