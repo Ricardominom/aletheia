@@ -167,7 +167,7 @@ export default function FinanzasPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background pt-20 px-6">
+    <div className="min-h-screen bg-background pt-24 px-6">
       <div className="max-w-[1920px] mx-auto space-y-8">
         {/* Top Forms in a grid */}
         <div className="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
