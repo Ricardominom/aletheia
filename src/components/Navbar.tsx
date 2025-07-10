@@ -23,9 +23,9 @@ export default function Navbar() {
 
   // Dashboard sub-tabs
   const dashboardTabs = [
-    { name: 'Encuestas', icon: BarChart3, path: dashboardPath + '?tab=encuestas' },
-    { name: 'Adversarios', icon: Users, path: dashboardPath + '?tab=adversarios' },
-    { name: 'Cochabamba', icon: MapIcon, path: dashboardPath + '?tab=cochabamba' },
+    { name: 'Encuestas', icon: BarChart3, tab: 'encuestas' },
+    { name: 'Adversarios', icon: Users, tab: 'adversarios' },
+    { name: 'Cochabamba', icon: MapIcon, tab: 'cochabamba' },
   ];
 
   const navItems = [
@@ -89,12 +89,15 @@ export default function Navbar() {
               )}
               
               {/* Regular navigation items */}
-              {navItems.map((item) => {
-                const Icon = item.icon;
+                const isActiveTab = location.search.includes(`tab=${tab.tab}`) || 
+                                   (tab.tab === 'encuestas' && !location.search);
                 return (
-                  <Link
+                  <button
                     key={item.name}
-                    to={item.path}
+                    onClick={() => {
+                      const newUrl = `${dashboardPath}?tab=${tab.tab}`;
+                      navigate(newUrl);
+                    }}
                     className={`flex items-center gap-2 px-6 h-full text-sm font-medium transition-all duration-300 relative ${
                       isActive(item.path)
                         ? 'text-primary'
@@ -106,7 +109,7 @@ export default function Navbar() {
                     {isActive(item.path) && (
                       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"></div>
                     )}
-                  </Link>
+                  </button>
                 );
               })}
             </div>
