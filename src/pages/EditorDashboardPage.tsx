@@ -23,6 +23,7 @@ import SocialListeningModal from '../components/modalComponents/SocialListeningM
 import OperationProgressModal from '../components/modalComponents/OperationProgressModal';
 import OperationMetricsModal from '../components/modalComponents/OperationMetricsModal';
 import AvisosTable from '../components/cochabamba/AvisosTable';
+import AdversariosTable from '../components/adversarios/AdversariosTable';
 
 export default function EditorDashboardPage() {
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
@@ -157,12 +158,7 @@ export default function EditorDashboardPage() {
           )}
 
           {activeTab === 'adversarios' && (
-            <div className="glassmorphic-container p-8 h-[400px] flex items-center justify-center">
-              <div className="text-center">
-                <h2 className="text-2xl font-semibold text-white mb-4">Adversarios</h2>
-                <p className="text-gray-400">Contenido de adversarios próximamente</p>
-              </div>
-            </div>
+            <AdversariosTable />
           )}
 
           {activeTab === 'cochabamba' && (

@@ -11,6 +11,7 @@ import SocialListening from '../components/SocialListening';
 import OperationProgress from '../components/OperationProgress';
 import OperationMetrics from '../components/OperationMetrics';
 import AvisosTable from '../components/cochabamba/AvisosTable';
+import AdversariosTable from '../components/adversarios/AdversariosTable';
 
 export default function DashboardPage() {
   const location = useLocation();
@@ -132,25 +133,7 @@ export default function DashboardPage() {
             {activeTab === 'adversarios' && (
               <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-12">
-                  <div className="glassmorphic-container p-12 h-[500px] flex items-center justify-center">
-                    <div className="text-center space-y-6">
-                      <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                        <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
-                          <div className="w-6 h-6 bg-primary rounded-full"></div>
-                        </div>
-                      </div>
-                      <div>
-                        <h2 className="text-3xl font-bold text-white mb-3 text-neon">Adversarios</h2>
-                        <p className="text-xl text-gray-400 max-w-md mx-auto">
-                          Análisis de competencia y estrategias de oposición próximamente
-                        </p>
-                      </div>
-                      <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
-                        <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                        <span>En desarrollo</span>
-                      </div>
-                    </div>
-                  </div>
+                  <AdversariosTable />
                 </div>
               </div>
             )}
