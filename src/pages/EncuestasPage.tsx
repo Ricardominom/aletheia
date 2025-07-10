@@ -25,12 +25,6 @@ export default function EncuestasPage() {
           {/* Feature Preview Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 w-full max-w-4xl">
             <div className="bg-card/50 border border-primary/20 rounded-lg p-6 hover:border-primary/40 transition-all duration-300">
-              <TrendingUp className="w-8 h-8 text-primary mb-4" />
-              <h3 className="text-lg font-semibold text-white mb-2">Análisis de Tendencias</h3>
-              <p className="text-gray-400 text-sm">Seguimiento de tendencias de opinión pública en tiempo real</p>
-            </div>
-            
-            <div className="bg-card/50 border border-primary/20 rounded-lg p-6 hover:border-primary/40 transition-all duration-300">
               <Users className="w-8 h-8 text-accent-teal mb-4" />
               <h3 className="text-lg font-semibold text-white mb-2">Segmentación</h3>
               <p className="text-gray-400 text-sm">Análisis por segmentos demográficos y geográficos</p>
