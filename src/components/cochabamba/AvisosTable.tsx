@@ -1,52 +1,22 @@
 import React, { useState } from 'react';
 import { Plus, MessageSquare, Calendar, Clock, Trash2 } from 'lucide-react';
 import AvisoModal from './AvisoModal';
-
-interface Aviso {
-  id: string;
-  mensaje: string;
-  fecha: string;
-  hora: string;
-  fechaCreacion: Date;
-}
+import { useDashboardStore } from '../../store/dashboardStore';
 
 export default function AvisosTable() {
-  const [avisos, setAvisos] = useState<Aviso[]>([
-    {
-      id: '1',
-      mensaje: 'Reunión de coordinación general programada para mañana a las 10:00 AM en la sede central.',
-      fecha: '2025-01-24',
-      hora: '10:00',
-      fechaCreacion: new Date('2025-01-23T14:30:00')
-    },
-    {
-      id: '2',
-      mensaje: 'Recordatorio: Entrega de materiales de campaña en los distritos 1, 2 y 3.',
-      fecha: '2025-01-23',
-      hora: '16:00',
-      fechaCreacion: new Date('2025-01-23T09:15:00')
-    },
-    {
-      id: '3',
-      mensaje: 'Evento público en la Plaza Principal. Se requiere apoyo de todos los coordinadores.',
-      fecha: '2025-01-25',
-      hora: '18:30',
-      fechaCreacion: new Date('2025-01-22T11:45:00')
-    }
-  ]);
+  const { avisos, addAviso, deleteAviso } = useDashboardStore(state => ({
+    avisos: state.avisosCochabamba,
+    addAviso: state.addAviso,
+    deleteAviso: state.deleteAviso
+  }));
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleAddAviso = (nuevoAviso: Omit<Aviso, 'id' | 'fechaCreacion'>) => {
-    const aviso: Aviso = {
-      ...nuevoAviso,
-      id: Date.now().toString(),
-      fechaCreacion: new Date()
-    };
-    setAvisos([aviso, ...avisos]); // Agregar al inicio para mantener orden cronológico
+  const handleAddAviso = (nuevoAviso: { mensaje: string; fecha: string; hora: string }) => {
+    addAviso(nuevoAviso);
   };
 
   const handleDeleteAviso = (id: string) => {
-    setAvisos(avisos.filter(aviso => aviso.id !== id));
+    deleteAviso(id);
   };
 
   const formatFechaCreacion = (fecha: Date) => {

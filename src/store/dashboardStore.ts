@@ -81,6 +81,15 @@ interface DashboardState {
     };
   }>;
 
+  // Avisos Cochabamba
+  avisosCochabamba: Array<{
+    id: string;
+    mensaje: string;
+    fecha: string;
+    hora: string;
+    fechaCreacion: Date;
+  }>;
+
   // Actions
   setCurrentUser: (user: 'admin' | 'editor' | null) => void;
   updateProfile: (data: Partial<DashboardState['profile']>) => void;
@@ -94,6 +103,8 @@ interface DashboardState {
   updateOperationMetrics: (data: DashboardState['operationMetrics'][0]) => void;
   resetToDefaults: () => void;
   setHasHydrated: (state: boolean) => void;
+  addAviso: (aviso: Omit<DashboardState['avisosCochabamba'][0], 'id' | 'fechaCreacion'>) => void;
+  deleteAviso: (id: string) => void;
 }
 
 // Default state factory
@@ -184,6 +195,30 @@ const createDefaultState = () => ({
       impressions: { current: 1000000, target: 1000000 },
     },
   ],
+  
+  avisosCochabamba: [
+    {
+      id: '1',
+      mensaje: 'Reunión de coordinación general programada para mañana a las 10:00 AM en la sede central.',
+      fecha: '2025-01-24',
+      hora: '10:00',
+      fechaCreacion: new Date('2025-01-23T14:30:00')
+    },
+    {
+      id: '2',
+      mensaje: 'Recordatorio: Entrega de materiales de campaña en los distritos 1, 2 y 3.',
+      fecha: '2025-01-23',
+      hora: '16:00',
+      fechaCreacion: new Date('2025-01-23T09:15:00')
+    },
+    {
+      id: '3',
+      mensaje: 'Evento público en la Plaza Principal. Se requiere apoyo de todos los coordinadores.',
+      fecha: '2025-01-25',
+      hora: '18:30',
+      fechaCreacion: new Date('2025-01-22T11:45:00')
+    }
+  ],
 });
 
 export const useDashboardStore = create<DashboardState>()(
@@ -268,6 +303,23 @@ export const useDashboardStore = create<DashboardState>()(
             item.area === data.area ? { ...item, ...data } : item
           ),
         })),
+      
+      addAviso: (avisoData) =>
+        set((state) => ({
+          avisosCochabamba: [
+            {
+              ...avisoData,
+              id: Date.now().toString(),
+              fechaCreacion: new Date()
+            },
+            ...state.avisosCochabamba
+          ]
+        })),
+      
+      deleteAviso: (id) =>
+        set((state) => ({
+          avisosCochabamba: state.avisosCochabamba.filter(aviso => aviso.id !== id)
+        })),
     }),
     {
       name: 'dashboard-storage',
@@ -283,6 +335,7 @@ export const useDashboardStore = create<DashboardState>()(
         socialListening: state.socialListening,
         operationProgress: state.operationProgress,
         operationMetrics: state.operationMetrics,
+        avisosCochabamba: state.avisosCochabamba,
       }),
       onRehydrateStorage: () => (state) => {
         // Ensure hydration is marked as complete
