@@ -21,13 +21,6 @@ export default function EncuestasPage() {
           <p className="text-xl text-gray-300 mb-8 max-w-2xl">
             Contenido de adversarios próximamente
           </p>
-          
-          {/* Coming Soon Message */}
-          <div className="mt-12 text-center">
-            <p className="text-gray-400">
-              Esta funcionalidad estará disponible próximamente
-            </p>
-          </div>
         </div>
       </div>
     </div>
