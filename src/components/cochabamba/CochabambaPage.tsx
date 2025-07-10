@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import { Plus, MessageSquare, Clock, AlertCircle, Trash2, Filter } from 'lucide-react';
+import { Plus, MessageSquare, Clock, AlertCircle, Trash2 } from 'lucide-react';
 import { useMessagesStore, Message } from '../../store/messagesStore';
 import MessageForm from './MessageForm';
 
 export default function CochabambaPage() {
   const { messages, deleteMessage } = useMessagesStore();
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [filter, setFilter] = useState({
-    priority: 'all',
-    category: 'all'
-  });
 
   const formatDateTime = (dateString: string) => {
     const date = new Date(dateString);
@@ -53,24 +49,10 @@ export default function CochabambaPage() {
     }
   };
 
-  // Filter messages
-  const filteredMessages = messages.filter(message => {
-    if (filter.priority !== 'all' && message.priority !== filter.priority) {
-      return false;
-    }
-    if (filter.category !== 'all' && message.category !== filter.category) {
-      return false;
-    }
-    return true;
-  });
-
   // Sort messages by date (newest first)
-  const sortedMessages = filteredMessages.sort((a, b) => 
+  const sortedMessages = messages.sort((a, b) => 
     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
-
-  // Get unique categories for filter
-  const categories = Array.from(new Set(messages.map(m => m.category)));
 
   const handleDeleteMessage = (id: string) => {
     if (window.confirm('¿Estás seguro de que quieres eliminar este mensaje?')) {
@@ -95,38 +77,6 @@ export default function CochabambaPage() {
         </button>
       </div>
 
-      {/* Filters */}
-      <div className="glassmorphic-container p-4">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 text-primary">
-            <Filter className="w-5 h-5" />
-            <span className="text-sm font-medium">Filtros:</span>
-          </div>
-          <div className="flex gap-4">
-            <select
-              value={filter.priority}
-              onChange={(e) => setFilter({ ...filter, priority: e.target.value })}
-              className="bg-background/50 border border-primary/20 rounded-lg px-3 py-2 text-sm text-gray-200"
-            >
-              <option value="all">Todas las prioridades</option>
-              <option value="high">Alta prioridad</option>
-              <option value="medium">Media prioridad</option>
-              <option value="low">Baja prioridad</option>
-            </select>
-            <select
-              value={filter.category}
-              onChange={(e) => setFilter({ ...filter, category: e.target.value })}
-              className="bg-background/50 border border-primary/20 rounded-lg px-3 py-2 text-sm text-gray-200"
-            >
-              <option value="all">Todas las categorías</option>
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </div>
-
       {/* Messages List */}
       <div className="glassmorphic-container p-6">
         {sortedMessages.length === 0 ? (
@@ -136,7 +86,7 @@ export default function CochabambaPage() {
             <p className="text-gray-500">
               {messages.length === 0 
                 ? 'Crea tu primer mensaje para comenzar'
-                : 'No hay mensajes que coincidan con los filtros seleccionados'
+                : 'No hay mensajes disponibles'
               }
             </p>
           </div>
