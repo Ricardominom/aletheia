@@ -83,18 +83,13 @@ export default function FinanceStatus() {
         
         {/* Header */}
         <div className="flex items-center justify-between mb-4 relative z-10">
-          <div className="flex items-center gap-2">
-            <div className="bg-primary/10 p-2 rounded-lg">
-              <MessageSquare className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-white text-neon">
-                Avisos Cochabamba
-              </h2>
-              <p className="text-xs text-gray-400">
-                {avisos.length} aviso{avisos.length !== 1 ? 's' : ''}
-              </p>
-            </div>
+          <div>
+            <h2 className="text-lg font-semibold text-white text-neon">
+              Avisos Cochabamba
+            </h2>
+            <p className="text-xs text-gray-400">
+              {avisos.length} aviso{avisos.length !== 1 ? 's' : ''}
+            </p>
           </div>
           
           <button
