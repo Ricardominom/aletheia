@@ -89,15 +89,12 @@ export default function Navbar() {
               )}
               
               {/* Regular navigation items */}
-                const isActiveTab = location.search.includes(`tab=${tab.tab}`) || 
-                                   (tab.tab === 'encuestas' && !location.search);
+              {navItems.map((item) => {
+                const Icon = item.icon;
                 return (
-                  <button
+                  <Link
                     key={item.name}
-                    onClick={() => {
-                      const newUrl = `${dashboardPath}?tab=${tab.tab}`;
-                      navigate(newUrl);
-                    }}
+                    to={item.path}
                     className={`flex items-center gap-2 px-6 h-full text-sm font-medium transition-all duration-300 relative ${
                       isActive(item.path)
                         ? 'text-primary'
@@ -109,7 +106,7 @@ export default function Navbar() {
                     {isActive(item.path) && (
                       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"></div>
                     )}
-                  </button>
+                  </Link>
                 );
               })}
             </div>
