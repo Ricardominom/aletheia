@@ -22,12 +22,6 @@ export default function EncuestasPage() {
             Contenido de adversarios próximamente
           </p>
           
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-accent-teal/10 border border-accent-teal/30 rounded-full">
-            <div className="w-3 h-3 bg-accent-teal rounded-full animate-pulse"></div>
-            <span className="text-accent-teal font-medium">En Construcción</span>
-          </div>
-          
           {/* Feature Preview Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 w-full max-w-4xl">
             <div className="bg-card/50 border border-primary/20 rounded-lg p-6 hover:border-primary/40 transition-all duration-300">
