@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import CampaignOverview from '../components/CampaignOverview';
 import CampaignProgress from '../components/CampaignProgress';
 import SecondaryIndicators from '../components/SecondaryIndicators';
 import FinanceStatus from '../components/FinanceStatus';
