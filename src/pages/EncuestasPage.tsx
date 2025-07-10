@@ -27,7 +27,7 @@ export default function EncuestasPage() {
             Encuestas
           </h1>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl">
-            Sistema de encuestas y análisis de opinión pública
+            Contenido de adversarios próximamente
           </p>
           
           {/* Status Badge */}
