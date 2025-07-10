@@ -72,7 +72,7 @@ export default function FinanceStatus() {
 
   return (
     <>
-      <div className="glassmorphic-container p-5 h-[480px] flex flex-col animate-scale-in">
+      <div className="glassmorphic-container p-5 h-[280px] flex flex-col animate-scale-in">
         {/* Background effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-accent-teal/5 to-[#F88379]/5 rounded-xl -z-10"></div>
         <div className="absolute inset-0 backdrop-blur-md rounded-xl -z-10"></div>
@@ -107,7 +107,7 @@ export default function FinanceStatus() {
         </div>
 
         {/* Avisos List */}
-        <div className="flex-1 overflow-y-auto space-y-3 relative z-10 pr-2">
+        <div className="flex-1 overflow-y-auto space-y-2 relative z-10 pr-2">
           {avisosOrdenados.length === 0 ? (
             <div className="text-center py-8">
               <MessageSquare className="w-12 h-12 text-gray-400 mx-auto mb-3" />
@@ -129,18 +129,18 @@ export default function FinanceStatus() {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="space-y-2">
-                  <p className="text-white text-sm font-medium leading-relaxed line-clamp-3">
+                  <p className="text-white text-xs font-medium leading-relaxed line-clamp-2">
                     {aviso.mensaje}
                   </p>
                   
-                  <div className="flex items-center justify-between text-xs">
+                  <div className="flex items-center justify-between text-[10px]">
                     <div className="flex items-center gap-1 text-primary">
-                      <Calendar className="w-3 h-3" />
+                      <Calendar className="w-2.5 h-2.5" />
                       <span>{formatFechaEvento(aviso.fecha, aviso.hora)}</span>
                     </div>
                     
                     <div className="flex items-center gap-1 text-gray-400">
-                      <Clock className="w-3 h-3" />
+                      <Clock className="w-2.5 h-2.5" />
                       <span>{formatFechaCreacion(aviso.fechaCreacion)}</span>
                     </div>
                   </div>

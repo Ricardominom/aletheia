@@ -92,9 +92,7 @@ export default function DashboardPage() {
                   
                   {/* Finance Status */}
                   <div className="col-span-12 lg:col-span-3">
-                    <div className="h-[280px]">
-                      <FinanceStatus />
-                    </div>
+                    <FinanceStatus />
                   </div>
                 </div>
 
