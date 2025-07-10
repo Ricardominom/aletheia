@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useDashboardStore } from '../store/dashboardStore';
 import CampaignOverview from '../components/CampaignOverview';
 import CampaignProgress from '../components/CampaignProgress';
 import SecondaryIndicators from '../components/SecondaryIndicators';
@@ -13,6 +14,7 @@ import OperationMetrics from '../components/OperationMetrics';
 export default function DashboardPage() {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('encuestas');
+  const setCurrentUser = useDashboardStore(state => state.setCurrentUser);
 
   // Update active tab based on URL parameter
   useEffect(() => {
@@ -25,6 +27,10 @@ export default function DashboardPage() {
     }
   }, [location.search]);
 
+  // Set current user when component mounts
+  useEffect(() => {
+    setCurrentUser('admin');
+  }, [setCurrentUser]);
   return (
     <div className="min-h-screen bg-gradient-to-bl from-[#4a5a64] from-15% via-[#121619] via-45% to-[#121619] relative">
       {/* Background overlay for additional depth */}

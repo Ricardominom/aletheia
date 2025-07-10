@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MessageSquare, MapPin, Home, LogOut, Lightbulb, BarChart3, Users, MapIcon } from 'lucide-react';
 import LogoutDialog from './LogoutDialog';
+import { useDashboardStore } from '../store/dashboardStore';
 
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
+  const setCurrentUser = useDashboardStore(state => state.setCurrentUser);
 
   const handleLogout = () => {
     setIsLogoutDialogOpen(false);
+    setCurrentUser(null);
     navigate('/');
   };
 

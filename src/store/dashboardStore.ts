@@ -1,6 +1,10 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface DashboardState {
+  // Current user info
+  currentUser: 'admin' | 'editor' | null;
+  
   // Profile
   profile: {
     name: string;
@@ -75,6 +79,7 @@ interface DashboardState {
   }>;
 
   // Actions
+  setCurrentUser: (user: 'admin' | 'editor' | null) => void;
   updateProfile: (data: Partial<DashboardState['profile']>) => void;
   updateTimeline: (data: DashboardState['timeline'][0]) => void;
   updateCampaignProgress: (data: DashboardState['campaignProgress'][0]) => void;
@@ -84,10 +89,11 @@ interface DashboardState {
   updateSocialListening: (data: Partial<DashboardState['socialListening']>) => void;
   updateOperationProgress: (data: DashboardState['operationProgress'][0]) => void;
   updateOperationMetrics: (data: DashboardState['operationMetrics'][0]) => void;
+  resetToDefaults: () => void;
 }
 
-export const useDashboardStore = create<DashboardState>((set) => ({
-  // Initial state
+// Default state factory
+const createDefaultState = () => ({
   profile: {
     name: 'Manfred Reyes Villa',
     compliance: 27.36,
@@ -174,58 +180,99 @@ export const useDashboardStore = create<DashboardState>((set) => ({
       impressions: { current: 1000000, target: 1000000 },
     },
   ],
+});
 
-  // Actions
-  updateProfile: (data) => 
-    set((state) => ({ profile: { ...state.profile, ...data } })),
-  
-  updateTimeline: (data) =>
-    set((state) => ({
-      timeline: state.timeline.map(item =>
-        item.week === data.week ? { ...item, ...data } : item
-      ),
-    })),
-  
-  updateCampaignProgress: (data) =>
-    set((state) => ({
-      campaignProgress: state.campaignProgress.map(item =>
-        item.campaign === data.campaign ? { ...item, ...data } : item
-      ),
-    })),
-  
-  updateIndicator: (data) =>
-    set((state) => ({
-      indicators: state.indicators.map(item =>
-        item.type === data.type ? { ...item, ...data } : item
-      ),
-    })),
-  
-  updateFinance: (data) =>
-    set((state) => ({ finance: { ...state.finance, ...data } })),
-  
-  updateTacticalData: (data) =>
-    set((state) => ({
-      tacticalData: state.tacticalData.map(item =>
-        item.candidate === data.candidate && item.date === data.date
-          ? { ...item, ...data, trend: data.trend || item.trend }
-          : item
-      ),
-    })),
-  
-  updateSocialListening: (data) =>
-    set((state) => ({ socialListening: { ...state.socialListening, ...data } })),
-  
-  updateOperationProgress: (data) =>
-    set((state) => ({
-      operationProgress: state.operationProgress.map(item =>
-        item.campaign === data.campaign ? { ...item, ...data } : item
-      ),
-    })),
-  
-  updateOperationMetrics: (data) =>
-    set((state) => ({
-      operationMetrics: state.operationMetrics.map(item =>
-        item.area === data.area ? { ...item, ...data } : item
-      ),
-    })),
-}));
+export const useDashboardStore = create<DashboardState>()(
+  persist(
+    (set, get) => ({
+      // Initial state
+      currentUser: null,
+      ...createDefaultState(),
+
+      // Actions
+      setCurrentUser: (user) => {
+        set({ currentUser: user });
+        // If switching users, ensure we have clean state
+        if (user && get().currentUser !== user) {
+          // For admin, always show the current saved state
+          // For editor, they can modify the state
+          // No need to reset, just track the current user
+        }
+      },
+
+      resetToDefaults: () => {
+        const defaults = createDefaultState();
+        set(defaults);
+      },
+      
+      updateProfile: (data) => 
+        set((state) => ({ profile: { ...state.profile, ...data } })),
+      
+      updateTimeline: (data) =>
+        set((state) => ({
+          timeline: state.timeline.map(item =>
+            item.week === data.week ? { ...item, ...data } : item
+          ),
+        })),
+      
+      updateCampaignProgress: (data) =>
+        set((state) => ({
+          campaignProgress: state.campaignProgress.map(item =>
+            item.campaign === data.campaign ? { ...item, ...data } : item
+          ),
+        })),
+      
+      updateIndicator: (data) =>
+        set((state) => ({
+          indicators: state.indicators.map(item =>
+            item.type === data.type ? { ...item, ...data } : item
+          ),
+        })),
+      
+      updateFinance: (data) =>
+        set((state) => ({ finance: { ...state.finance, ...data } })),
+      
+      updateTacticalData: (data) =>
+        set((state) => ({
+          tacticalData: state.tacticalData.map(item =>
+            item.candidate === data.candidate && item.date === data.date
+              ? { ...item, ...data, trend: data.trend || item.trend }
+              : item
+          ),
+        })),
+      
+      updateSocialListening: (data) =>
+        set((state) => ({ socialListening: { ...state.socialListening, ...data } })),
+      
+      updateOperationProgress: (data) =>
+        set((state) => ({
+          operationProgress: state.operationProgress.map(item =>
+            item.campaign === data.campaign ? { ...item, ...data } : item
+          ),
+        })),
+      
+      updateOperationMetrics: (data) =>
+        set((state) => ({
+          operationMetrics: state.operationMetrics.map(item =>
+            item.area === data.area ? { ...item, ...data } : item
+          ),
+        })),
+    }),
+    {
+      name: 'dashboard-storage',
+      // Persist all state including user-specific data
+      partialize: (state) => ({
+        currentUser: state.currentUser,
+        profile: state.profile,
+        timeline: state.timeline,
+        campaignProgress: state.campaignProgress,
+        indicators: state.indicators,
+        finance: state.finance,
+        tacticalData: state.tacticalData,
+        socialListening: state.socialListening,
+        operationProgress: state.operationProgress,
+        operationMetrics: state.operationMetrics,
+      }),
+    }
+  )
+);

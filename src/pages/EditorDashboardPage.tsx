@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { LogOut, Edit3 } from 'lucide-react';
+import { useDashboardStore } from '../store/dashboardStore';
 import CampaignProgress from '../components/CampaignProgress';
 import CampaignOverview from '../components/CampaignOverview';
 import SecondaryIndicators from '../components/SecondaryIndicators';
@@ -28,6 +29,7 @@ export default function EditorDashboardPage() {
   const [activeTab, setActiveTab] = useState('encuestas');
   const location = useLocation();
   const navigate = useNavigate();
+  const setCurrentUser = useDashboardStore(state => state.setCurrentUser);
 
   // Update active tab based on URL parameter
   useEffect(() => {
@@ -40,8 +42,13 @@ export default function EditorDashboardPage() {
     }
   }, [location.search]);
 
+  // Set current user when component mounts
+  useEffect(() => {
+    setCurrentUser('editor');
+  }, [setCurrentUser]);
   const handleLogout = () => {
     setIsLogoutDialogOpen(false);
+    setCurrentUser(null);
     navigate('/');
   };
 

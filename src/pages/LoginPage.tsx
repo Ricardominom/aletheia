@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useDashboardStore } from '../store/dashboardStore';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -10,6 +11,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const setCurrentUser = useDashboardStore(state => state.setCurrentUser);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,8 +20,10 @@ export default function LoginPage() {
     
     setTimeout(() => {
       if (email === 'admin' && password === '1234admin') {
+        setCurrentUser('admin');
         navigate('/dashboard');
       } else if (email === 'editor' && password === '1234editor') {
+        setCurrentUser('editor');
         navigate('/dashboard/editor');
       } else {
         setError('Credenciales inválidas');
