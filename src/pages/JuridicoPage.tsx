@@ -246,7 +246,7 @@ export default function JuridicoPage() {
   const filteredFolders = folders.filter(folder => folder.type === activeTab);
 
   return (
-    <div className="min-h-screen bg-background pt-24 px-6">
+    <div className="min-h-screen bg-background pt-20 px-6">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-2xl font-bold text-white mb-8">Base de Datos Jurídica</h1>
         
