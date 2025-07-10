@@ -15,6 +15,14 @@ export default function AvisoModal({ isOpen, onClose, onSubmit }: AvisoModalProp
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Set default date to today
+  React.useEffect(() => {
+    if (isOpen && !formData.fecha) {
+      const today = new Date().toISOString().split('T')[0];
+      setFormData(prev => ({ ...prev, fecha: today }));
+    }
+  }, [isOpen, formData.fecha]);
+
   if (!isOpen) return null;
 
   const validateForm = () => {
@@ -70,14 +78,6 @@ export default function AvisoModal({ isOpen, onClose, onSubmit }: AvisoModalProp
     setErrors({});
     onClose();
   };
-
-  // Set default date to today
-  React.useEffect(() => {
-    if (isOpen && !formData.fecha) {
-      const today = new Date().toISOString().split('T')[0];
-      setFormData(prev => ({ ...prev, fecha: today }));
-    }
-  }, [isOpen, formData.fecha]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
