@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { LogOut, Edit3 } from 'lucide-react';
-import CampaignOverview from '../components/CampaignOverview';
 import CampaignProgress from '../components/CampaignProgress';
 import SecondaryIndicators from '../components/SecondaryIndicators';
 import FinanceStatus from '../components/FinanceStatus';
@@ -25,13 +25,19 @@ export default function EditorDashboardPage() {
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState('encuestas');
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const tabs = [
-    { id: 'encuestas', label: 'Encuestas' },
-    { id: 'adversarios', label: 'Adversarios' },
-    { id: 'cochabamba', label: 'Cochabamba' }
-  ];
+  // Update active tab based on URL parameter
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const tab = urlParams.get('tab');
+    if (tab && ['encuestas', 'adversarios', 'cochabamba'].includes(tab)) {
+      setActiveTab(tab);
+    } else {
+      setActiveTab('encuestas');
+    }
+  }, [location.search]);
 
   const handleLogout = () => {
     setIsLogoutDialogOpen(false);
@@ -56,25 +62,6 @@ export default function EditorDashboardPage() {
       {/* Main content with padding to account for navbar */}
       <div className="pt-16 p-4 lg:p-6">
         <div className="max-w-[1920px] mx-auto space-y-4 relative">
-          {/* Tab Navigation */}
-          <div className="mb-6">
-            <div className="flex space-x-1 bg-card/50 p-1 rounded-lg backdrop-blur-sm border border-primary/20 max-w-md">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex-1 px-4 py-2 text-sm font-medium rounded-md transition-all duration-300 ${
-                    activeTab === tab.id
-                      ? 'bg-primary/10 text-primary border border-primary/30'
-                      : 'text-gray-400 hover:text-gray-300 hover:bg-primary/5'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* Tab Content */}
           {activeTab === 'encuestas' && (
             <>

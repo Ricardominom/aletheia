@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Building2, Scale, MessageSquare, MapPin, Home, LogOut, Lightbulb } from 'lucide-react';
+import { MessageSquare, MapPin, Home, LogOut, Lightbulb, BarChart3, Users, MapIcon } from 'lucide-react';
 import LogoutDialog from './LogoutDialog';
 
 export default function Navbar() {
@@ -21,11 +21,21 @@ export default function Navbar() {
   const isEditorMode = location.pathname.includes('/editor');
   const dashboardPath = isEditorMode ? '/dashboard/editor' : '/dashboard';
 
+  // Dashboard sub-tabs
+  const dashboardTabs = [
+    { name: 'Encuestas', icon: BarChart3, path: dashboardPath + '?tab=encuestas' },
+    { name: 'Adversarios', icon: Users, path: dashboardPath + '?tab=adversarios' },
+    { name: 'Cochabamba', icon: MapIcon, path: dashboardPath + '?tab=cochabamba' },
+  ];
+
   const navItems = [
     { name: 'Comunicación', icon: MessageSquare, path: '/comunicacion' },
     { name: 'Territorial', icon: MapPin, path: '/territorial' },
     { name: 'Estrategia', icon: Lightbulb, path: '/estrategia' },
   ];
+
+  // Check if we're on dashboard to show sub-tabs
+  const isDashboard = location.pathname === dashboardPath || location.pathname === '/dashboard' || location.pathname === '/dashboard/editor';
 
   return (
     <>
@@ -49,6 +59,36 @@ export default function Navbar() {
 
             {/* Center - Navigation items */}
             <div className="flex items-center justify-center flex-1">
+              {/* Dashboard sub-tabs when on dashboard */}
+              {isDashboard && (
+                <div className="flex items-center mr-8">
+                  {dashboardTabs.map((tab) => {
+                    const Icon = tab.icon;
+                    const isActiveTab = location.search.includes(`tab=${tab.path.split('=')[1]}`) || 
+                                       (tab.path.includes('encuestas') && !location.search);
+                    return (
+                      <Link
+                        key={tab.name}
+                        to={tab.path}
+                        className={`flex items-center gap-2 px-4 h-full text-sm font-medium transition-all duration-300 relative ${
+                          isActiveTab
+                            ? 'text-primary'
+                            : 'text-gray-400 hover:text-gray-200'
+                        }`}
+                      >
+                        <Icon className="w-4 h-4" />
+                        {tab.name}
+                        {isActiveTab && (
+                          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"></div>
+                        )}
+                      </Link>
+                    );
+                  })}
+                  <div className="w-px h-8 bg-primary/20 mx-4"></div>
+                </div>
+              )}
+              
+              {/* Regular navigation items */}
               {navItems.map((item) => {
                 const Icon = item.icon;
                 return (
