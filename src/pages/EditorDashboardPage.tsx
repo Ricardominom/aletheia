@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { LogOut, Edit3 } from 'lucide-react';
 import CampaignProgress from '../components/CampaignProgress';
 import SecondaryIndicators from '../components/SecondaryIndicators';
-import CochabambaWidget from '../components/CochabambaWidget';
+import FinanceStatus from '../components/FinanceStatus';
 import TacticalTracking from '../components/TacticalTracking';
 import SocialListening from '../components/SocialListening';
 import OperationProgress from '../components/OperationProgress';
 import OperationMetrics from '../components/OperationMetrics';
 import LogoutDialog from '../components/LogoutDialog';
-import CampaignOverview from '../components/CampaignOverview';
-import CochabambaPage from '../components/cochabamba/CochabambaPage';
 
 // Import all modal components
 import ProfileModal from '../components/modalComponents/ProfileModal';
@@ -28,6 +26,7 @@ export default function EditorDashboardPage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState('encuestas');
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Update active tab based on URL parameter
   useEffect(() => {
@@ -39,6 +38,11 @@ export default function EditorDashboardPage() {
       setActiveTab('encuestas');
     }
   }, [location.search]);
+
+  const handleLogout = () => {
+    setIsLogoutDialogOpen(false);
+    navigate('/');
+  };
 
   const EditButton = ({ onClick }: { onClick: () => void }) => (
     <button
@@ -88,7 +92,7 @@ export default function EditorDashboardPage() {
                 </div>
                 <div className="col-span-12 lg:col-span-3 relative">
                   <EditButton onClick={() => setActiveModal('finance')} />
-                  <CochabambaWidget />
+                  <FinanceStatus />
                 </div>
               </div>
 
@@ -132,7 +136,12 @@ export default function EditorDashboardPage() {
           )}
 
           {activeTab === 'cochabamba' && (
-            <CochabambaPage />
+            <div className="glassmorphic-container p-8 h-[400px] flex items-center justify-center">
+              <div className="text-center">
+                <h2 className="text-2xl font-semibold text-white mb-4">Cochabamba</h2>
+                <p className="text-gray-400">Contenido de Cochabamba próximamente</p>
+              </div>
+            </div>
           )}
         </div>
       </div>
@@ -151,10 +160,7 @@ export default function EditorDashboardPage() {
       <LogoutDialog
         isOpen={isLogoutDialogOpen}
         onClose={() => setIsLogoutDialogOpen(false)}
-        onConfirm={() => {
-          setIsLogoutDialogOpen(false);
-          window.location.href = '/';
-        }}
+        onConfirm={handleLogout}
       />
 
       {/* All Modals */}

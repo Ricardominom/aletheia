@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import CampaignOverview from '../components/CampaignOverview';
-import BudgetTimeline from '../components/BudgetTimeline';
 import CampaignProgress from '../components/CampaignProgress';
 import SecondaryIndicators from '../components/SecondaryIndicators';
 import FinanceStatus from '../components/FinanceStatus';
@@ -10,12 +9,10 @@ import TacticalTracking from '../components/TacticalTracking';
 import SocialListening from '../components/SocialListening';
 import OperationProgress from '../components/OperationProgress';
 import OperationMetrics from '../components/OperationMetrics';
-import CochabambaWidget from '../components/CochabambaWidget';
-import CochabambaPage from '../components/cochabamba/CochabambaPage';
 
 export default function DashboardPage() {
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState('adversarios');
+  const [activeTab, setActiveTab] = useState('encuestas');
 
   // Update active tab based on URL parameter
   useEffect(() => {
@@ -24,7 +21,7 @@ export default function DashboardPage() {
     if (tab && ['encuestas', 'adversarios', 'cochabamba'].includes(tab)) {
       setActiveTab(tab);
     } else {
-      setActiveTab('adversarios');
+      setActiveTab('encuestas');
     }
   }, [location.search]);
 
@@ -39,7 +36,7 @@ export default function DashboardPage() {
         <div className="container mx-auto p-4 lg:p-6 max-w-[1920px]">
           <div className="space-y-6">
             {/* Tab Content */}
-            {activeTab === 'adversarios' && (
+            {activeTab === 'encuestas' && (
               <>
                 {/* Top Section */}
                 <div className="grid grid-cols-12 gap-6">
@@ -51,9 +48,6 @@ export default function DashboardPage() {
                         subtitle="Cumplimiento General" 
                         profileImage="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                       />
-                    </div>
-                    <div className="col-span-4">
-                      <BudgetTimeline title="Timeline: Planeado vs Ejercido" />
                     </div>
                     
                     {/* Left column - bottom section */}
@@ -67,7 +61,7 @@ export default function DashboardPage() {
                     <SecondaryIndicators />
                   </div>
                   <div className="col-span-12 lg:col-span-3">
-                    <CochabambaWidget />
+                    <FinanceStatus />
                   </div>
                 </div>
                 
@@ -97,17 +91,22 @@ export default function DashboardPage() {
               </>
             )}
 
-            {activeTab === 'encuestas' && (
+            {activeTab === 'adversarios' && (
               <div className="glassmorphic-container p-8 h-[400px] flex items-center justify-center">
                 <div className="text-center">
-                  <h2 className="text-2xl font-semibold text-white mb-4">Encuestas</h2>
-                  <p className="text-gray-400">Contenido de encuestas próximamente</p>
+                  <h2 className="text-2xl font-semibold text-white mb-4">Adversarios</h2>
+                  <p className="text-gray-400">Contenido de adversarios próximamente</p>
                 </div>
               </div>
             )}
 
             {activeTab === 'cochabamba' && (
-              <CochabambaPage />
+              <div className="glassmorphic-container p-8 h-[400px] flex items-center justify-center">
+                <div className="text-center">
+                  <h2 className="text-2xl font-semibold text-white mb-4">Cochabamba</h2>
+                  <p className="text-gray-400">Contenido de Cochabamba próximamente</p>
+                </div>
+              </div>
             )}
           </div>
         </div>
