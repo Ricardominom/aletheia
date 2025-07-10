@@ -40,7 +40,7 @@ export default function EditorDashboardPage() {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const tab = urlParams.get('tab');
-    if (tab && ['encuestas', 'adversarios', 'cochabamba'].includes(tab)) {
+    if (tab && ['adversarios', 'cochabamba'].includes(tab)) {
       setActiveTab(tab);
     } else {
       setActiveTab('encuestas');
