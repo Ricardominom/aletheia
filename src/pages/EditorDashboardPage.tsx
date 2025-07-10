@@ -24,7 +24,14 @@ import OperationMetricsModal from '../components/modalComponents/OperationMetric
 export default function EditorDashboardPage() {
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
   const [activeModal, setActiveModal] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState('encuestas');
   const navigate = useNavigate();
+
+  const tabs = [
+    { id: 'encuestas', label: 'Encuestas' },
+    { id: 'adversarios', label: 'Adversarios' },
+    { id: 'cochabamba', label: 'Cochabamba' }
+  ];
 
   const handleLogout = () => {
     setIsLogoutDialogOpen(false);
@@ -49,64 +56,106 @@ export default function EditorDashboardPage() {
       {/* Main content with padding to account for navbar */}
       <div className="pt-16 p-4 lg:p-6">
         <div className="max-w-[1920px] mx-auto space-y-4 relative">
-          {/* Top Section */}
-          <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-12 lg:col-span-6 grid grid-cols-6 gap-4">
-              {/* Left column - top section */}
-              <div className="col-span-2 relative">
-                <EditButton onClick={() => setActiveModal('profile')} />
-                <CampaignOverview 
-                  title="27.36%" 
-                  subtitle="Cumplimiento General" 
-                  profileImage="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                />
-              </div>
-              
-              {/* Left column - bottom section */}
-              <div className="col-span-6 relative">
-                <EditButton onClick={() => setActiveModal('campaign-progress')} />
-                <CampaignProgress />
-              </div>
-            </div>
-
-            {/* Right columns - full height */}
-            <div className="col-span-12 lg:col-span-3 relative">
-              <EditButton onClick={() => setActiveModal('secondary-indicators')} />
-              <SecondaryIndicators />
-            </div>
-            <div className="col-span-12 lg:col-span-3 relative">
-              <EditButton onClick={() => setActiveModal('finance')} />
-              <FinanceStatus />
+          {/* Tab Navigation */}
+          <div className="mb-6">
+            <div className="flex space-x-1 bg-card/50 p-1 rounded-lg backdrop-blur-sm border border-primary/20 max-w-md">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex-1 px-4 py-2 text-sm font-medium rounded-md transition-all duration-300 ${
+                    activeTab === tab.id
+                      ? 'bg-primary/10 text-primary border border-primary/30'
+                      : 'text-gray-400 hover:text-gray-300 hover:bg-primary/5'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Middle Section */}
-          <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-12 lg:col-span-6 relative">
-              <EditButton onClick={() => setActiveModal('tactical-tracking')} />
-              <TacticalTracking />
-            </div>
-            <div className="col-span-12 lg:col-span-6 relative">
-              <EditButton onClick={() => setActiveModal('social-listening')} />
-              <SocialListening />
-            </div>
-          </div>
+          {/* Tab Content */}
+          {activeTab === 'encuestas' && (
+            <>
+              {/* Top Section */}
+              <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-12 lg:col-span-6 grid grid-cols-6 gap-4">
+                  {/* Left column - top section */}
+                  <div className="col-span-2 relative">
+                    <EditButton onClick={() => setActiveModal('profile')} />
+                    <CampaignOverview 
+                      title="27.36%" 
+                      subtitle="Cumplimiento General" 
+                      profileImage="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    />
+                  </div>
+                  
+                  {/* Left column - bottom section */}
+                  <div className="col-span-6 relative">
+                    <EditButton onClick={() => setActiveModal('campaign-progress')} />
+                    <CampaignProgress />
+                  </div>
+                </div>
 
-          {/* Bottom Section */}
-          <div className="grid grid-cols-12 gap-4 mt-5">
-            <div className="col-span-12 lg:col-span-4 relative">
-              <EditButton onClick={() => setActiveModal('operation-progress')} />
-              <div className="dashboard-card p-4 h-[400px] overflow-y-auto">
-                <OperationProgress />
+                {/* Right columns - full height */}
+                <div className="col-span-12 lg:col-span-3 relative">
+                  <EditButton onClick={() => setActiveModal('secondary-indicators')} />
+                  <SecondaryIndicators />
+                </div>
+                <div className="col-span-12 lg:col-span-3 relative">
+                  <EditButton onClick={() => setActiveModal('finance')} />
+                  <FinanceStatus />
+                </div>
+              </div>
+
+              {/* Middle Section */}
+              <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-12 lg:col-span-6 relative">
+                  <EditButton onClick={() => setActiveModal('tactical-tracking')} />
+                  <TacticalTracking />
+                </div>
+                <div className="col-span-12 lg:col-span-6 relative">
+                  <EditButton onClick={() => setActiveModal('social-listening')} />
+                  <SocialListening />
+                </div>
+              </div>
+
+              {/* Bottom Section */}
+              <div className="grid grid-cols-12 gap-4 mt-5">
+                <div className="col-span-12 lg:col-span-4 relative">
+                  <EditButton onClick={() => setActiveModal('operation-progress')} />
+                  <div className="dashboard-card p-4 h-[400px] overflow-y-auto">
+                    <OperationProgress />
+                  </div>
+                </div>
+                <div className="col-span-12 lg:col-span-8 relative">
+                  <EditButton onClick={() => setActiveModal('operation-metrics')} />
+                  <div className="dashboard-card p-4 h-[400px] overflow-y-auto">
+                    <OperationMetrics />
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {activeTab === 'adversarios' && (
+            <div className="glassmorphic-container p-8 h-[400px] flex items-center justify-center">
+              <div className="text-center">
+                <h2 className="text-2xl font-semibold text-white mb-4">Adversarios</h2>
+                <p className="text-gray-400">Contenido de adversarios próximamente</p>
               </div>
             </div>
-            <div className="col-span-12 lg:col-span-8 relative">
-              <EditButton onClick={() => setActiveModal('operation-metrics')} />
-              <div className="dashboard-card p-4 h-[400px] overflow-y-auto">
-                <OperationMetrics />
+          )}
+
+          {activeTab === 'cochabamba' && (
+            <div className="glassmorphic-container p-8 h-[400px] flex items-center justify-center">
+              <div className="text-center">
+                <h2 className="text-2xl font-semibold text-white mb-4">Cochabamba</h2>
+                <p className="text-gray-400">Contenido de Cochabamba próximamente</p>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
