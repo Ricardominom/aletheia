@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { LogOut, Edit3 } from 'lucide-react';
 import CampaignProgress from '../components/CampaignProgress';
+import CampaignOverview from '../components/CampaignOverview';
 import SecondaryIndicators from '../components/SecondaryIndicators';
 import FinanceStatus from '../components/FinanceStatus';
 import TacticalTracking from '../components/TacticalTracking';
