@@ -10,7 +10,6 @@ import TacticalTracking from '../components/TacticalTracking';
 import SocialListening from '../components/SocialListening';
 import OperationProgress from '../components/OperationProgress';
 import OperationMetrics from '../components/OperationMetrics';
-import BudgetTimeline from '../components/BudgetTimeline';
 import AvisosTable from '../components/cochabamba/AvisosTable';
 
 export default function DashboardPage() {
@@ -84,15 +83,8 @@ export default function DashboardPage() {
                     </div>
                   </div>
                   
-                  {/* Timeline Chart */}
-                  <div className="col-span-12 lg:col-span-5">
-                    <div className="h-[320px]">
-                      <BudgetTimeline title="Timeline: Planeado vs Ejercido" />
-                    </div>
-                  </div>
-                  
                   {/* Secondary Indicators */}
-                  <div className="col-span-12 lg:col-span-3">
+                  <div className="col-span-12 lg:col-span-8">
                     <div className="h-[320px]">
                       <SecondaryIndicators />
                     </div>
