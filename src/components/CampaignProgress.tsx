@@ -16,7 +16,7 @@ export default function CampaignProgress() {
   }
 
   return (
-    <div className="glassmorphic-container p-5 animate-scale-in">
+    <div className="glassmorphic-container p-6 animate-scale-in">
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-60"></div>
       <div className="absolute inset-0 bg-card/80 backdrop-blur-md -z-10"></div>
@@ -26,15 +26,15 @@ export default function CampaignProgress() {
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-40 h-1 bg-gradient-to-r from-accent-pink/0 via-accent-pink/30 to-accent-pink/0 blur-sm"></div>
       
       <h2 className="text-lg font-semibold text-white sticky top-0 z-10 text-neon mb-4 tracking-wider">
-        MONITOR DE PROGRESO
+        PROGRESO DE CAMPAÑAS
       </h2>
       
       {/* Progress Indicators */}
-      <div className="grid grid-cols-5 gap-3 mt-4">
+      <div className="grid grid-cols-5 gap-4 mb-6">
         {campaigns.map((item, index) => (
           <div 
             key={item.id}
-            className="target-card p-3 animate-scale-in hover:scale-105 transition-transform duration-300"
+            className="target-card p-4 animate-scale-in hover:scale-105 transition-transform duration-300"
             style={{ animationDelay: `${index * 100}ms` }}
           >
             {/* Background effects */}
@@ -57,22 +57,22 @@ export default function CampaignProgress() {
                 </span>
               </div>
             </div>
-            <div className="text-[10px] text-gray-300 uppercase mt-2 leading-tight">
-              AVANCE GENERAL DE LA CAMPAÑA {item.name}
+            <div className="text-[11px] text-gray-300 uppercase mt-3 leading-tight font-medium">
+              {item.name}
             </div>
           </div>
         ))}
       </div>
       
       {/* Progress Bars */}
-      <div className="space-y-4 mt-6">
+      <div className="space-y-4">
         {campaigns.map((item, index) => (
           <div key={item.id} className="animate-slide-up" style={{ animationDelay: `${index * 100}ms` }}>
-            <div className="flex items-center gap-4">
-              <div className="w-24 text-xs font-medium text-gray-300">
+            <div className="flex items-center gap-6">
+              <div className="w-20 text-xs font-medium text-gray-300 text-right">
                 {item.name}
               </div>
-              <div className="flex-1 h-3 bg-card/50 rounded-full overflow-hidden relative">
+              <div className="flex-1 h-4 bg-card/50 rounded-full overflow-hidden relative">
                 {/* Progress bar */}
                 <div 
                   className={`h-full transition-all duration-500 ease-out ${
@@ -89,7 +89,7 @@ export default function CampaignProgress() {
                   backgroundSize: '5px 5px'
                 }}></div>
               </div>
-              <div className="w-16 text-right text-xs font-medium text-gray-300">
+              <div className="w-14 text-right text-xs font-medium text-gray-300">
                 {formatPercentage(item.progress)}
               </div>
             </div>

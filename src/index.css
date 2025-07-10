@@ -25,16 +25,16 @@ body {
   @apply relative overflow-hidden border border-gray-800;
   background-color: var(--card);
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 8px 32px rgba(0, 0, 0, 0.4),
     0 -1px 1px rgba(255, 255, 255, 0.05) inset;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dashboard-card:hover {
   border-color: rgba(75, 123, 229, 0.2);
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   box-shadow: 
-    0 30px 60px rgba(0, 0, 0, 0.7),
+    0 16px 48px rgba(0, 0, 0, 0.5),
     0 -1px 1px rgba(255, 255, 255, 0.05) inset;
 }
 
@@ -43,9 +43,10 @@ body {
   @apply relative overflow-hidden border border-gray-800;
   background: linear-gradient(180deg, var(--card) 0%, rgba(14, 30, 36, 0.8) 100%);
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 8px 32px rgba(0, 0, 0, 0.4),
     0 -1px 1px rgba(255, 255, 255, 0.05) inset;
   backdrop-filter: blur(10px);
+  border-radius: 12px;
 }
 
 /* Target card styles */
@@ -53,9 +54,11 @@ body {
   @apply relative overflow-hidden;
   background: linear-gradient(180deg, var(--card) 0%, rgba(14, 30, 36, 0.8) 100%);
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 4px 16px rgba(0, 0, 0, 0.3),
     0 -1px 1px rgba(255, 255, 255, 0.05) inset;
   backdrop-filter: blur(10px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Text effects */

@@ -65,16 +65,16 @@ export default function DashboardPage() {
       
       {/* Main content with padding to account for navbar */}
       <div className="pt-20 min-h-screen">
-        <div className="container mx-auto p-8 max-w-[1920px]">
-          <div className="space-y-10">
+        <div className="container mx-auto px-6 py-8 max-w-[1920px]">
+          <div className="space-y-8">
             {/* Tab Content */}
             {activeTab === 'encuestas' && (
               <>
                 {/* Hero Section - Campaign Overview */}
-                <div className="grid grid-cols-12 gap-8">
+                <div className="grid grid-cols-12 gap-6">
                   {/* Main Overview Card - Larger and more prominent */}
-                  <div className="col-span-12 lg:col-span-4">
-                    <div className="h-[320px]">
+                  <div className="col-span-12 lg:col-span-3">
+                    <div className="h-[280px]">
                       <CampaignOverview 
                         title="27.36%" 
                         subtitle="Cumplimiento General" 
@@ -84,25 +84,29 @@ export default function DashboardPage() {
                   </div>
                   
                   {/* Secondary Indicators */}
-                  <div className="col-span-12 lg:col-span-8">
-                    <div className="h-[320px]">
+                  <div className="col-span-12 lg:col-span-6">
+                    <div className="h-[280px]">
                       <SecondaryIndicators />
+                    </div>
+                  </div>
+                  
+                  {/* Finance Status */}
+                  <div className="col-span-12 lg:col-span-3">
+                    <div className="h-[280px]">
+                      <FinanceStatus />
                     </div>
                   </div>
                 </div>
 
                 {/* Campaign Progress Section */}
-                <div className="grid grid-cols-12 gap-8">
-                  <div className="col-span-12 lg:col-span-8">
+                <div className="grid grid-cols-12 gap-6">
+                  <div className="col-span-12">
                     <CampaignProgress />
-                  </div>
-                  <div className="col-span-12 lg:col-span-4">
-                    <FinanceStatus />
                   </div>
                 </div>
                 
                 {/* Analytics Section - Equal columns for better balance */}
-                <div className="grid grid-cols-12 gap-8">
+                <div className="grid grid-cols-12 gap-6">
                   <div className="col-span-12 lg:col-span-6">
                     <TacticalTracking />
                   </div>
@@ -112,13 +116,13 @@ export default function DashboardPage() {
                 </div>
                 
                 {/* Operations Section - Better proportions */}
-                <div className="grid grid-cols-12 gap-8">
-                  <div className="col-span-12 lg:col-span-5">
+                <div className="grid grid-cols-12 gap-6">
+                  <div className="col-span-12 lg:col-span-4">
                     <div className="glassmorphic-container p-6 h-[450px] overflow-y-auto animate-scale-in">
                       <OperationProgress />
                     </div>
                   </div>
-                  <div className="col-span-12 lg:col-span-7">
+                  <div className="col-span-12 lg:col-span-8">
                     <div className="glassmorphic-container p-6 h-[450px] overflow-y-auto animate-scale-in">
                       <OperationMetrics />
                     </div>
@@ -128,7 +132,7 @@ export default function DashboardPage() {
             )}
 
             {activeTab === 'adversarios' && (
-              <div className="grid grid-cols-12 gap-8">
+              <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-12">
                   <div className="glassmorphic-container p-12 h-[500px] flex items-center justify-center">
                     <div className="text-center space-y-6">
@@ -154,7 +158,7 @@ export default function DashboardPage() {
             )}
 
             {activeTab === 'cochabamba' && (
-              <div className="grid grid-cols-12 gap-8">
+              <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-12">
                   <AvisosTable />
                 </div>
