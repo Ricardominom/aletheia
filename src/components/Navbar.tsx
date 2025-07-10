@@ -42,7 +42,7 @@ export default function Navbar() {
             {/* Left side - Home button */}
             <Link
               to={dashboardPath}
-              className={`flex items-center gap-2 px-6 h-full text-sm font-medium transition-all duration-300 relative ${
+              className={`flex items-center gap-2 px-4 h-full text-sm font-medium transition-all duration-300 relative ${
                 isActive(dashboardPath)
                   ? 'text-primary'
                   : 'text-gray-400 hover:text-gray-200'
@@ -67,7 +67,7 @@ export default function Navbar() {
                     <Link
                       key={tab.name}
                       to={tab.path}
-                      className={`flex items-center gap-2 px-4 h-full text-sm font-medium transition-all duration-300 relative ${
+                      className={`flex items-center gap-2 px-5 h-full text-sm font-medium transition-all duration-300 relative ${
                         isActiveTab
                           ? 'text-primary'
                           : 'text-gray-400 hover:text-gray-200'
@@ -90,7 +90,7 @@ export default function Navbar() {
                   <Link
                     key={item.name}
                     to={item.path}
-                    className={`flex items-center gap-2 px-6 h-full text-sm font-medium transition-all duration-300 relative ${
+                    className={`flex items-center gap-2 px-5 h-full text-sm font-medium transition-all duration-300 relative ${
                       isActive(item.path)
                         ? 'text-primary'
                         : 'text-gray-400 hover:text-gray-200'
