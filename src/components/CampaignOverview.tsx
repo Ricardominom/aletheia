@@ -14,22 +14,22 @@ export default function CampaignOverview({ title, subtitle }: CampaignOverviewPr
   }));
 
   return (
-    <div className="glassmorphic-container p-4 h-[180px] relative overflow-hidden animate-scale-in">
+    <div className="glassmorphic-container p-6 h-full relative overflow-hidden animate-scale-in">
       {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-radial from-primary/10 to-transparent opacity-60"></div>
-      <div className="absolute -inset-[100px] bg-gradient-to-b from-background/0 via-primary/5 to-background/0 blur-3xl opacity-30 animate-pulse-slow"></div>
+      <div className="absolute inset-0 bg-gradient-radial from-primary/15 to-transparent opacity-70"></div>
+      <div className="absolute -inset-[100px] bg-gradient-to-b from-background/0 via-primary/8 to-background/0 blur-3xl opacity-40 animate-pulse-slow"></div>
       
-      <div className="flex flex-col items-center justify-center h-full space-y-4 relative z-10">
+      <div className="flex flex-col items-center justify-center h-full space-y-6 relative z-10">
         {/* Profile Image Container */}
-        <div className="relative w-20 h-20 animate-float">
+        <div className="relative w-28 h-28 animate-float">
           {/* Outer Glow */}
-          <div className="absolute -inset-2 bg-gradient-radial from-accent-teal/30 to-accent-pink/30 blur-xl"></div>
+          <div className="absolute -inset-3 bg-gradient-radial from-accent-teal/40 to-accent-pink/40 blur-xl"></div>
           
           {/* Inner Glow Ring with improved 3D effect */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-accent-teal/40 via-primary/30 to-accent-pink/40 blur-sm animate-rotate"></div>
+          <div className="absolute -inset-2 bg-gradient-to-r from-accent-teal/50 via-primary/40 to-accent-pink/50 blur-sm animate-rotate"></div>
           
           {/* Image Container with glassmorphic effect */}
-          <div className="relative w-20 h-20 overflow-hidden backdrop-blur-sm shadow-neon">
+          <div className="relative w-28 h-28 overflow-hidden backdrop-blur-sm shadow-neon rounded-full">
             {/* Base layer for depth */}
             <div className="absolute inset-0 bg-card/70 backdrop-blur-md"></div>
             
@@ -51,17 +51,22 @@ export default function CampaignOverview({ title, subtitle }: CampaignOverviewPr
         {/* Text Content with enhanced effects */}
         <div className="text-center space-y-1 relative z-10">
           {/* Title with stronger glow effect */}
-          <h3 className="text-4xl font-bold text-white tracking-tight text-neon-strong">
+          <h3 className="text-5xl font-bold text-white tracking-tight text-neon-strong">
             <span className="relative">
               {profile.compliance}%
-              <div className="absolute -inset-2 bg-primary/20 blur-lg -z-10"></div>
+              <div className="absolute -inset-3 bg-primary/25 blur-lg -z-10"></div>
             </span>
           </h3>
           
           {/* Subtitle with improved hover effect */}
-          <p className="text-sm text-gray-300 font-medium transition-colors duration-300 relative group hover:text-white">
+          <p className="text-base text-gray-300 font-medium transition-colors duration-300 relative group hover:text-white">
             {profile.name}
             <span className="absolute -inset-1 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover:opacity-100 group-hover:animate-pulse-slow transition-all duration-500 blur-sm"></span>
+          </p>
+          
+          {/* Additional subtitle */}
+          <p className="text-sm text-gray-400 font-light">
+            Cumplimiento General
           </p>
         </div>
       </div>
@@ -70,9 +75,9 @@ export default function CampaignOverview({ title, subtitle }: CampaignOverviewPr
       <div className="absolute bottom-0 left-0 right-0 h-1/4 bg-gradient-to-t from-primary/10 to-transparent"></div>
       
       {/* Subtle particle effects */}
-      <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-primary rounded-full animate-pulse-slow"></div>
-      <div className="absolute top-3/4 left-1/2 w-1 h-1 bg-accent-teal rounded-full animate-pulse-slow" style={{ animationDelay: '0.5s' }}></div>
-      <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-accent-pink rounded-full animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-pulse-slow"></div>
+      <div className="absolute top-3/4 left-1/2 w-2 h-2 bg-accent-teal rounded-full animate-pulse-slow" style={{ animationDelay: '0.5s' }}></div>
+      <div className="absolute top-1/3 right-1/4 w-2 h-2 bg-accent-pink rounded-full animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
     </div>
   );
 }

@@ -44,6 +44,8 @@ export default {
         "slide-up": "slide-up 0.6s ease-out forwards",
         "scale-in": "scale-in 0.5s ease-out forwards",
         "fade-in": "fade-in 0.5s forwards",
+        "float-slow": "float-slow 20s ease-in-out infinite",
+        "float-medium": "float-medium 15s ease-in-out infinite",
         shimmer: "shimmer 2s linear infinite",
         "gradient-x": "gradient-x 15s ease infinite",
         "move-x": "move-x 45s linear infinite",
@@ -81,6 +83,15 @@ export default {
         "move-y": {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(100px)" },
+        },
+        "float-slow": {
+          "0%, 100%": { transform: "translate(0, 0) rotate(0deg)" },
+          "33%": { transform: "translate(30px, -30px) rotate(120deg)" },
+          "66%": { transform: "translate(-20px, 20px) rotate(240deg)" },
+        },
+        "float-medium": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "50%": { transform: "translate(-40px, -20px) scale(1.1)" },
         },
       },
       backgroundImage: {

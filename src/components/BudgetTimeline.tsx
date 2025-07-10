@@ -140,7 +140,7 @@ export default function BudgetTimeline({ title }: BudgetTimelineProps) {
   };
 
   return (
-    <div className="glassmorphic-container p-4 h-[180px] relative animate-scale-in">
+    <div className="glassmorphic-container p-6 h-full relative animate-scale-in">
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-accent-teal/5 to-accent-pink/5 -z-10"></div>
       <div className="absolute inset-0 backdrop-blur-md -z-10"></div>
@@ -160,9 +160,9 @@ export default function BudgetTimeline({ title }: BudgetTimelineProps) {
         
       </div>
       
-      <h3 className="text-sm font-semibold text-white mb-3 text-neon relative z-10">{title}</h3>
+      <h3 className="text-lg font-semibold text-white mb-4 text-neon relative z-10">{title}</h3>
       
-      <div className="h-[120px] relative">
+      <div className="h-[calc(100%-4rem)] relative">
         <div className="absolute inset-0 bg-gradient-to-br from-accent-teal/5 to-[#F88379]/5"></div>
         <Line data={data} options={options} />
       </div>
