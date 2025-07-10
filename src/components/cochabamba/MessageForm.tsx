@@ -19,8 +19,8 @@ export default function MessageForm({ isOpen, onClose }: MessageFormProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.content.trim() && formData.category.trim()) {
-      addMessage(formData);
+    if (formData.content.trim()) {
+      addMessage({ ...formData, category: 'General' });
       setFormData({ content: '', priority: 'medium', category: '' });
       onClose();
     }
@@ -59,22 +59,7 @@ export default function MessageForm({ isOpen, onClose }: MessageFormProps) {
 
         {/* Content */}
         <form onSubmit={handleSubmit} className="relative p-6 space-y-6">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">
-                Categoría
-              </label>
-              <input
-                type="text"
-                name="category"
-                value={formData.category}
-                onChange={handleInputChange}
-                className="w-full bg-background/90 border border-primary/20 rounded-lg px-4 py-3 text-gray-200 placeholder-gray-500 focus:outline-none focus:border-primary/40 transition-colors"
-                placeholder="Ej: Reuniones, Estrategia, Material..."
-                required
-              />
-            </div>
-            <div>
+          <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">
                 Prioridad
               </label>
@@ -88,7 +73,6 @@ export default function MessageForm({ isOpen, onClose }: MessageFormProps) {
                 <option value="medium">Media</option>
                 <option value="high">Alta</option>
               </select>
-            </div>
           </div>
 
           <div>
@@ -113,7 +97,7 @@ export default function MessageForm({ isOpen, onClose }: MessageFormProps) {
               <div className="target-card p-3">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs text-gray-400 uppercase font-medium">
-                    {formData.category || 'Categoría'}
+                    General
                   </span>
                   <span className={`text-xs font-medium ${
                     formData.priority === 'high' ? 'text-accent-pink' :
@@ -140,9 +124,9 @@ export default function MessageForm({ isOpen, onClose }: MessageFormProps) {
             </button>
             <button
               type="submit"
-              disabled={!formData.content.trim() || !formData.category.trim()}
+              disabled={!formData.content.trim()}
               className={`flex items-center gap-2 px-6 py-2 rounded-lg transition-all duration-300 ${
-                formData.content.trim() && formData.category.trim()
+                formData.content.trim()
                   ? 'bg-primary/10 border border-primary/50 text-primary hover:bg-primary/20 text-neon'
                   : 'bg-gray-800 border border-gray-700 text-gray-500 cursor-not-allowed'
               }`}
