@@ -14,14 +14,6 @@ export default function EncuestasPage() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-accent-teal/10 rounded-full blur-3xl"></div>
           
-          {/* Icon Container */}
-          <div className="relative mb-8">
-            <div className="absolute -inset-4 bg-primary/20 rounded-full blur-xl animate-pulse-slow"></div>
-            <div className="relative bg-primary/10 p-8 rounded-full border border-primary/20">
-              <BarChart3 className="w-24 h-24 text-primary" />
-            </div>
-          </div>
-          
           {/* Content */}
           <h1 className="text-4xl font-bold text-white mb-4 text-neon">
             Encuestas
