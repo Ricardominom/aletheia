@@ -4,12 +4,13 @@ import { useEffect } from 'react';
 import { LogOut, Edit3 } from 'lucide-react';
 import CampaignProgress from '../components/CampaignProgress';
 import SecondaryIndicators from '../components/SecondaryIndicators';
-import FinanceStatus from '../components/FinanceStatus';
+import CochabambaWidget from '../components/CochabambaWidget';
 import TacticalTracking from '../components/TacticalTracking';
 import SocialListening from '../components/SocialListening';
 import OperationProgress from '../components/OperationProgress';
 import OperationMetrics from '../components/OperationMetrics';
 import LogoutDialog from '../components/LogoutDialog';
+import CochabambaPage from '../components/cochabamba/CochabambaPage';
 
 // Import all modal components
 import ProfileModal from '../components/modalComponents/ProfileModal';
@@ -92,7 +93,7 @@ export default function EditorDashboardPage() {
                 </div>
                 <div className="col-span-12 lg:col-span-3 relative">
                   <EditButton onClick={() => setActiveModal('finance')} />
-                  <FinanceStatus />
+                  <CochabambaWidget />
                 </div>
               </div>
 
@@ -136,12 +137,7 @@ export default function EditorDashboardPage() {
           )}
 
           {activeTab === 'cochabamba' && (
-            <div className="glassmorphic-container p-8 h-[400px] flex items-center justify-center">
-              <div className="text-center">
-                <h2 className="text-2xl font-semibold text-white mb-4">Cochabamba</h2>
-                <p className="text-gray-400">Contenido de Cochabamba próximamente</p>
-              </div>
-            </div>
+            <CochabambaPage />
           )}
         </div>
       </div>
