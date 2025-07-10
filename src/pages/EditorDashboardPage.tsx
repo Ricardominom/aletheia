@@ -57,7 +57,7 @@ export default function EditorDashboardPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-background/10 to-transparent opacity-50"></div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-background/20 via-transparent to-transparent"></div>
         
-        <div className="pt-24 min-h-screen flex items-center justify-center">
+        <div className="pt-20 min-h-screen flex items-center justify-center">
           <div className="glassmorphic-container p-8 text-center">
             <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full mx-auto mb-4"></div>
             <p className="text-gray-400">Cargando dashboard...</p>
@@ -89,7 +89,7 @@ export default function EditorDashboardPage() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-background/20 via-transparent to-transparent"></div>
 
       {/* Main content with padding to account for navbar */}
-      <div className="pt-24 p-4 lg:p-6">
+      <div className="pt-20 p-4 lg:p-6 min-h-screen">
         <div className="max-w-[1920px] mx-auto space-y-4 relative">
           {/* Tab Content */}
           {activeTab === 'encuestas' && (

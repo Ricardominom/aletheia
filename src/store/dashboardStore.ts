@@ -191,7 +191,7 @@ export const useDashboardStore = create<DashboardState>()(
     (set, get) => ({
       // Initial state
       currentUser: null,
-      _hasHydrated: false,
+      _hasHydrated: true, // Start as true to prevent layout shifts
       ...createDefaultState(),
 
       // Actions
@@ -285,7 +285,10 @@ export const useDashboardStore = create<DashboardState>()(
         operationMetrics: state.operationMetrics,
       }),
       onRehydrateStorage: () => (state) => {
-        state?.setHasHydrated(true);
+        // Ensure hydration is marked as complete
+        if (state) {
+          state.setHasHydrated(true);
+        }
       },
     }
   )

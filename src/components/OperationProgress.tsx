@@ -7,15 +7,6 @@ export default function OperationProgress() {
     _hasHydrated: state._hasHydrated
   }));
 
-  // Don't render until hydrated
-  if (!_hasHydrated) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <div className="animate-spin w-6 h-6 border-2 border-primary border-t-transparent rounded-full"></div>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-4">
       <h2 className="text-lg font-semibold text-white sticky top-0 bg-background py-2 z-10 text-neon relative">
