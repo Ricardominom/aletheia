@@ -1,6 +1,5 @@
 import React from 'react';
 import CampaignOverview from '../components/CampaignOverview';
-import BudgetTimeline from '../components/BudgetTimeline';
 import CampaignProgress from '../components/CampaignProgress';
 import SecondaryIndicators from '../components/SecondaryIndicators';
 import FinanceStatus from '../components/FinanceStatus';
@@ -30,9 +29,6 @@ export default function DashboardPage() {
                     subtitle="Cumplimiento General" 
                     profileImage="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                   />
-                </div>
-                <div className="col-span-4">
-                  <BudgetTimeline title="Timeline: Planeado vs Ejercido" />
                 </div>
                 
                 {/* Left column - bottom section */}

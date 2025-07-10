@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LogOut, Edit3 } from 'lucide-react';
 import CampaignOverview from '../components/CampaignOverview';
-import BudgetTimeline from '../components/BudgetTimeline';
 import CampaignProgress from '../components/CampaignProgress';
 import SecondaryIndicators from '../components/SecondaryIndicators';
 import FinanceStatus from '../components/FinanceStatus';
@@ -14,7 +13,6 @@ import LogoutDialog from '../components/LogoutDialog';
 
 // Import all modal components
 import ProfileModal from '../components/modalComponents/ProfileModal';
-import TimelineModal from '../components/modalComponents/TimelineModal';
 import CampaignProgressModal from '../components/modalComponents/CampaignProgressModal';
 import FinanceModal from '../components/modalComponents/FinanceModal';
 import SecondaryIndicatorsModal from '../components/modalComponents/SecondaryIndicatorsModal';
@@ -62,10 +60,6 @@ export default function EditorDashboardPage() {
                   subtitle="Cumplimiento General" 
                   profileImage="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 />
-              </div>
-              <div className="col-span-4 relative">
-                <EditButton onClick={() => setActiveModal('timeline')} />
-                <BudgetTimeline title="Timeline: Planeado vs Ejercido" />
               </div>
               
               {/* Left column - bottom section */}
@@ -136,10 +130,6 @@ export default function EditorDashboardPage() {
       {/* All Modals */}
       <ProfileModal
         isOpen={activeModal === 'profile'}
-        onClose={() => setActiveModal(null)}
-      />
-      <TimelineModal
-        isOpen={activeModal === 'timeline'}
         onClose={() => setActiveModal(null)}
       />
       <CampaignProgressModal
