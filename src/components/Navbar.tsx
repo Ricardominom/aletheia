@@ -83,13 +83,13 @@ export default function Navbar() {
                     const isActiveTab = tab.path.startsWith('/encuestas') 
                       ? location.pathname === '/encuestas'
                       : location.pathname.includes('/dashboard') && 
-                        (location.search.includes('tab=' + tab.path.split('=')[1]) || 
+                        (location.search.includes(\`tab=${tab.path.split('=')[1]}`) || 
                         (tab.path.includes('adversarios') && !location.search));
                     return (
                       <Link
                         key={tab.name}
                         to={tab.path}
-                        className={`flex items-center gap-1 px-3 h-4 text-xs font-medium transition-all duration-300 relative ${
+                        className={\`flex items-center gap-1 px-3 h-4 text-xs font-medium transition-all duration-300 relative ${
                           isActiveTab
                             ? 'text-primary'
                             : 'text-gray-400 hover:text-gray-200'
