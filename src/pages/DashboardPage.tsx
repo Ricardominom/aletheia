@@ -61,39 +61,42 @@ export default function DashboardPage() {
       
       {/* Main content with padding to account for navbar */}
       <div className="pt-20 min-h-screen">
-        <div className="container mx-auto p-4 lg:p-6 max-w-[1920px]">
-          <div className="space-y-6">
+        <div className="container mx-auto p-6 max-w-[1920px]">
+          <div className="space-y-8">
             {/* Tab Content */}
             {activeTab === 'encuestas' && (
               <>
-                {/* Top Section */}
+                {/* Top Section - Reorganized for better balance */}
                 <div className="grid grid-cols-12 gap-6">
-                  <div className="col-span-12 lg:col-span-6 grid grid-cols-6 gap-6">
-                    {/* Left column - top section */}
-                    <div className="col-span-2">
-                      <CampaignOverview 
-                        title="27.36%" 
-                        subtitle="Cumplimiento General" 
-                        profileImage="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      />
-                    </div>
-                    
-                    {/* Left column - bottom section */}
-                    <div className="col-span-6">
-                      <CampaignProgress />
+                  {/* Left side - Profile and Progress */}
+                  <div className="col-span-12 lg:col-span-8">
+                    <div className="grid grid-cols-12 gap-6 h-full">
+                      {/* Profile Overview */}
+                      <div className="col-span-12 md:col-span-3">
+                        <CampaignOverview 
+                          title="27.36%" 
+                          subtitle="Cumplimiento General" 
+                          profileImage="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        />
+                      </div>
+                      
+                      {/* Campaign Progress */}
+                      <div className="col-span-12 md:col-span-9">
+                        <CampaignProgress />
+                      </div>
                     </div>
                   </div>
                   
-                  {/* Right columns - full height */}
-                  <div className="col-span-12 lg:col-span-3">
-                    <SecondaryIndicators />
-                  </div>
-                  <div className="col-span-12 lg:col-span-3">
-                    <FinanceStatus />
+                  {/* Right side - Indicators and Finance */}
+                  <div className="col-span-12 lg:col-span-4">
+                    <div className="grid grid-cols-1 gap-6 h-full">
+                      <SecondaryIndicators />
+                      <FinanceStatus />
+                    </div>
                   </div>
                 </div>
                 
-                {/* Middle Section */}
+                {/* Middle Section - Analytics */}
                 <div className="grid grid-cols-12 gap-6">
                   <div className="col-span-12 lg:col-span-6">
                     <TacticalTracking />
@@ -103,7 +106,7 @@ export default function DashboardPage() {
                   </div>
                 </div>
                 
-                {/* Bottom Section */}
+                {/* Bottom Section - Operations */}
                 <div className="grid grid-cols-12 gap-6">
                   <div className="col-span-12 lg:col-span-4">
                     <div className="glassmorphic-container p-5 h-[400px] overflow-y-auto animate-scale-in">
