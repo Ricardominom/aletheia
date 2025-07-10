@@ -38,7 +38,7 @@ export default function DashboardPage() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-background/20 via-transparent to-transparent"></div>
       
       {/* Main content with padding to account for navbar */}
-      <div className="pt-24 min-h-screen">
+      <div className="pt-20 min-h-screen">
         <div className="container mx-auto p-4 lg:p-6 max-w-[1920px]">
           <div className="space-y-6">
             {/* Tab Content */}
