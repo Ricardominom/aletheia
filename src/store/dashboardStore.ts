@@ -340,6 +340,13 @@ export const useDashboardStore = create<DashboardState>()(
       onRehydrateStorage: () => (state) => {
         // Ensure hydration is marked as complete
         if (state) {
+          // Convert fechaCreacion strings back to Date objects
+          if (state.avisosCochabamba) {
+            state.avisosCochabamba = state.avisosCochabamba.map(aviso => ({
+              ...aviso,
+              fechaCreacion: new Date(aviso.fechaCreacion)
+            }));
+          }
           state.setHasHydrated(true);
         }
       },
