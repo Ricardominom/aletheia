@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { LogOut, Edit3 } from 'lucide-react';
 import CampaignProgress from '../components/CampaignProgress';
@@ -28,7 +28,6 @@ export default function EditorDashboardPage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState('encuestas');
   const location = useLocation();
-  const navigate = useNavigate();
 
   // Update active tab based on URL parameter
   useEffect(() => {
@@ -40,11 +39,6 @@ export default function EditorDashboardPage() {
       setActiveTab('encuestas');
     }
   }, [location.search]);
-
-  const handleLogout = () => {
-    setIsLogoutDialogOpen(false);
-    navigate('/');
-  };
 
   const EditButton = ({ onClick }: { onClick: () => void }) => (
     <button
@@ -157,7 +151,10 @@ export default function EditorDashboardPage() {
       <LogoutDialog
         isOpen={isLogoutDialogOpen}
         onClose={() => setIsLogoutDialogOpen(false)}
-        onConfirm={handleLogout}
+        onConfirm={() => {
+          setIsLogoutDialogOpen(false);
+          window.location.href = '/';
+        }}
       />
 
       {/* All Modals */}

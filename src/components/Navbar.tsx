@@ -5,13 +5,7 @@ import LogoutDialog from './LogoutDialog';
 
 export default function Navbar() {
   const location = useLocation();
-  const navigate = useNavigate();
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
-
-  const handleLogout = () => {
-    setIsLogoutDialogOpen(false);
-    navigate('/');
-  };
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -124,7 +118,10 @@ export default function Navbar() {
       <LogoutDialog
         isOpen={isLogoutDialogOpen}
         onClose={() => setIsLogoutDialogOpen(false)}
-        onConfirm={handleLogout}
+        onConfirm={() => {
+          setIsLogoutDialogOpen(false);
+          window.location.href = '/';
+        }}
       />
     </>
   );

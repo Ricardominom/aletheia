@@ -15,7 +15,7 @@ import CochabambaPage from '../components/cochabamba/CochabambaPage';
 
 export default function DashboardPage() {
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState('encuestas');
+  const [activeTab, setActiveTab] = useState('adversarios');
 
   // Update active tab based on URL parameter
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function DashboardPage() {
     if (tab && ['encuestas', 'adversarios', 'cochabamba'].includes(tab)) {
       setActiveTab(tab);
     } else {
-      setActiveTab('encuestas');
+      setActiveTab('adversarios');
     }
   }, [location.search]);
 
@@ -39,7 +39,7 @@ export default function DashboardPage() {
         <div className="container mx-auto p-4 lg:p-6 max-w-[1920px]">
           <div className="space-y-6">
             {/* Tab Content */}
-            {activeTab === 'encuestas' && (
+            {activeTab === 'adversarios' && (
               <>
                 {/* Top Section */}
                 <div className="grid grid-cols-12 gap-6">
@@ -97,11 +97,11 @@ export default function DashboardPage() {
               </>
             )}
 
-            {activeTab === 'adversarios' && (
+            {activeTab === 'encuestas' && (
               <div className="glassmorphic-container p-8 h-[400px] flex items-center justify-center">
                 <div className="text-center">
-                  <h2 className="text-2xl font-semibold text-white mb-4">Adversarios</h2>
-                  <p className="text-gray-400">Contenido de adversarios próximamente</p>
+                  <h2 className="text-2xl font-semibold text-white mb-4">Encuestas</h2>
+                  <p className="text-gray-400">Contenido de encuestas próximamente</p>
                 </div>
               </div>
             )}
