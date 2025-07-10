@@ -11,7 +11,6 @@ export default function MessageForm({ isOpen, onClose }: MessageFormProps) {
   const { addMessage } = useMessagesStore();
   const [formData, setFormData] = useState({
     content: '',
-    priority: 'medium' as 'low' | 'medium' | 'high',
     category: ''
   });
 
@@ -20,8 +19,9 @@ export default function MessageForm({ isOpen, onClose }: MessageFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.content.trim()) {
-      addMessage({ ...formData, category: 'General' });
+      addMessage({ ...formData, priority: 'medium', category: 'General' });
       setFormData({ content: '', priority: 'medium', category: '' });
+      setFormData({ content: '', category: '' });
       onClose();
     }
   };
@@ -60,22 +60,6 @@ export default function MessageForm({ isOpen, onClose }: MessageFormProps) {
         {/* Content */}
         <form onSubmit={handleSubmit} className="relative p-6 space-y-6">
           <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">
-                Prioridad
-              </label>
-              <select
-                name="priority"
-                value={formData.priority}
-                onChange={handleInputChange}
-                className="w-full bg-background/90 border border-primary/20 rounded-lg px-4 py-3 text-gray-200 focus:outline-none focus:border-primary/40 transition-colors"
-              >
-                <option value="low">Baja</option>
-                <option value="medium">Media</option>
-                <option value="high">Alta</option>
-              </select>
-          </div>
-
-          <div>
             <label className="block text-sm font-medium text-gray-400 mb-2">
               Mensaje
             </label>
@@ -99,13 +83,8 @@ export default function MessageForm({ isOpen, onClose }: MessageFormProps) {
                   <span className="text-xs text-gray-400 uppercase font-medium">
                     General
                   </span>
-                  <span className={`text-xs font-medium ${
-                    formData.priority === 'high' ? 'text-accent-pink' :
-                    formData.priority === 'medium' ? 'text-primary' :
-                    'text-accent-teal'
-                  }`}>
-                    {formData.priority === 'high' ? 'Alta' :
-                     formData.priority === 'medium' ? 'Media' : 'Baja'}
+                  <span className="text-xs font-medium text-primary">
+                    Media
                   </span>
                 </div>
                 <p className="text-sm text-gray-300">{formData.content}</p>
