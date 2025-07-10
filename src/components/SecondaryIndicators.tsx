@@ -18,7 +18,7 @@ export default function SecondaryIndicators() {
       <div className="absolute bottom-0 left-0 w-24 h-24 bg-accent-pink/10 rounded-full blur-3xl"></div>
       
       <h2 className="text-lg font-semibold text-white mb-6 text-neon relative z-10">
-        INDICADORES SECUNDARIOS
+        INDICADORES DE PROGRESO
       </h2>
       
       <div className="grid grid-cols-2 gap-6 h-[calc(100%-4rem)]">
