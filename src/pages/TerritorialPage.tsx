@@ -113,7 +113,7 @@ export default function TerritorialPage() {
               <span className="text-gray-400">({currentRegion?.location})</span>
             </div>
             <div className="text-sm text-gray-400">
-              Progreso general: <span className="text-accent-teal font-medium">
+              Cumplimiento de Metas: <span className="text-accent-teal font-medium">
                 {getRegionProgress(selectedRegion).toFixed(1)}%
               </span>
             </div>
