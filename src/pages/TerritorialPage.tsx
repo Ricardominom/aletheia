@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Trophy, Target, TrendingUp, TrendingDown } from 'lucide-react';
+import { useDashboardStore } from '../store/dashboardStore';
 import ElectoralStructureCard from '../components/territorial/ElectoralStructureCard';
 import EventsCard from '../components/territorial/EventsCard';
 import PromotionCard from '../components/territorial/PromotionCard';
@@ -37,16 +38,16 @@ const generateRegionData = () => {
 
 export default function TerritorialPage() {
   const [selectedRegion, setSelectedRegion] = useState('cochabamba');
-  const [regionData] = useState(generateRegionData());
   const [showCompetition, setShowCompetition] = useState(false);
 
+  const getTerritorialData = useDashboardStore(state => state.getTerritorialData);
+
   const currentRegion = BOLIVIA_REGIONS.find(r => r.id === selectedRegion);
-  const currentData = regionData[selectedRegion];
 
   // Calcular progreso por región para la competencia
   const getRegionProgress = (regionId: string) => {
-    const data = regionData[regionId];
-    const defenderProgress = (data.defenders / data.targetDefenders) * 100;
+    const data = getTerritorialData(regionId);
+    const defenderProgress = (data.defenders.length / data.targetDefenders) * 100;
     const promotionProgress = (data.promotedCount / data.targetPromoters) * 100;
     return (defenderProgress + promotionProgress) / 2;
   };
@@ -56,7 +57,7 @@ export default function TerritorialPage() {
     .map(region => ({
       ...region,
       progress: getRegionProgress(region.id),
-      data: regionData[region.id]
+      data: getTerritorialData(region.id)
     }))
     .sort((a, b) => b.progress - a.progress);
 
@@ -199,7 +200,7 @@ export default function TerritorialPage() {
                       <div className="flex items-center gap-1">
                         <Target className="w-3 h-3 text-accent-teal" />
                         <span className="text-gray-400">Defensores:</span>
-                        <span className="text-white">{region.data.defenders}/{region.data.targetDefenders}</span>
+                        <span className="text-white">{region.data.defenders.length}/{region.data.targetDefenders}</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Trophy className="w-3 h-3 text-accent-pink" />
@@ -227,19 +228,16 @@ export default function TerritorialPage() {
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <ElectoralStructureCard 
               selectedRegion={selectedRegion}
-              regionData={currentData}
             />
           </div>
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <EventsCard 
               selectedRegion={selectedRegion}
-              regionData={currentData}
             />
           </div>
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <PromotionCard 
               selectedRegion={selectedRegion}
-              regionData={currentData}
             />
           </div>
           
@@ -247,13 +245,11 @@ export default function TerritorialPage() {
           <div className="col-span-12 md:col-span-6">
             <SegmentCampaignCard 
               selectedRegion={selectedRegion}
-              regionData={currentData}
             />
           </div>
           <div className="col-span-12 md:col-span-6">
             <MobilizationCard 
               selectedRegion={selectedRegion}
-              regionData={currentData}
             />
           </div>
         </div>
