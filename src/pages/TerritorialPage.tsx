@@ -61,7 +61,7 @@ export default function TerritorialPage() {
     .sort((a, b) => b.progress - a.progress);
 
   return (
-    <div className="min-h-screen bg-background pt-24 px-6">
+    <div className="min-h-screen bg-background pt-24 px-6 pb-12">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header con selector de región y toggle de competencia */}
         <div className="flex items-center justify-between">
