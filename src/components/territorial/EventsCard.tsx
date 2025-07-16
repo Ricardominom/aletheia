@@ -48,47 +48,22 @@ export default function EventsCard() {
 
   return (
     <>
-      <div className="glassmorphic-container p-4 min-h-[300px] flex flex-col">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="bg-primary/10 p-2 rounded-lg">
-              <Calendar className="w-6 h-6 text-primary" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-white">Eventos</h3>
-              <p className="text-gray-400 text-sm">Eventos por región</p>
-            </div>
+      <div className="glassmorphic-container p-4 h-[300px] flex flex-col relative">
+        {/* Total en esquina superior derecha */}
+        <div className="absolute top-4 right-4 bg-primary/20 border border-primary/40 rounded-lg px-3 py-2 backdrop-blur-sm">
+          <div className="text-center">
+            <div className="text-primary font-bold text-lg leading-none">{totalEvents}</div>
+            <div className="text-xs text-gray-400 mt-1">eventos</div>
           </div>
         </div>
 
-        {/* Totales Generales */}
-        <div className="bg-card/50 rounded-lg p-4 border border-primary/20 mb-4">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <BarChart3 className="w-5 h-5 text-primary" />
-              <span className="text-white font-medium">Total Nacional</span>
-            </div>
-            <div className="text-right">
-              <div className="text-primary font-bold text-xl">
-                {totalEvents}
-              </div>
-              <div className="text-xs text-gray-400">
-                eventos registrados
-              </div>
-            </div>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="bg-primary/10 p-2 rounded-lg">
+            <Calendar className="w-6 h-6 text-primary" />
           </div>
-          
-          {/* Indicador visual total */}
-          <div className="flex items-center gap-2">
-            <div className="flex-1 h-2 bg-background/50 rounded-full">
-              <div 
-                className="h-full bg-primary rounded-full transition-all duration-300"
-                style={{ width: totalEvents > 0 ? '100%' : '0%' }}
-              />
-            </div>
-            <span className="text-xs text-gray-400">
-              {totalEvents > 0 ? 'Activo' : 'Sin eventos'}
-            </span>
+          <div>
+            <h3 className="text-lg font-semibold text-white">Eventos</h3>
+            <p className="text-gray-400 text-sm">Eventos por región</p>
           </div>
         </div>
 

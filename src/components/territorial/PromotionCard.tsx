@@ -53,42 +53,24 @@ export default function PromotionCard() {
 
   return (
     <>
-      <div className="glassmorphic-container p-4 min-h-[300px] flex flex-col">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="bg-accent-pink/10 p-2 rounded-lg">
-              <Users className="w-6 h-6 text-accent-pink" />
+      <div className="glassmorphic-container p-4 h-[300px] flex flex-col relative">
+        {/* Total en esquina superior derecha */}
+        <div className="absolute top-4 right-4 bg-accent-pink/20 border border-accent-pink/40 rounded-lg px-3 py-2 backdrop-blur-sm">
+          <div className="text-center">
+            <div className="text-accent-pink font-bold text-lg leading-none">
+              {totalPromoted}/{totalTargetPromoters}
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-white">Promoción</h3>
-              <p className="text-gray-400 text-sm">Promovidos por región</p>
-            </div>
+            <div className="text-xs text-gray-400 mt-1">{totalProgress.toFixed(1)}%</div>
           </div>
         </div>
 
-        {/* Totales Generales */}
-        <div className="bg-card/50 rounded-lg p-4 border border-accent-pink/20 mb-4">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <Target className="w-5 h-5 text-accent-pink" />
-              <span className="text-white font-medium">Total Nacional</span>
-            </div>
-            <div className="text-right">
-              <div className="text-accent-pink font-bold text-xl">
-                {totalPromoted}/{totalTargetPromoters}
-              </div>
-              <div className="text-xs text-gray-400">
-                {totalProgress.toFixed(1)}%
-              </div>
-            </div>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="bg-accent-pink/10 p-2 rounded-lg">
+            <Users className="w-6 h-6 text-accent-pink" />
           </div>
-          
-          {/* Barra de progreso total */}
-          <div className="h-3 bg-background/50 rounded-lg overflow-hidden">
-            <div 
-              className="h-full bg-accent-pink transition-all duration-300"
-              style={{ width: `${Math.min(totalProgress, 100)}%` }}
-            />
+          <div>
+            <h3 className="text-lg font-semibold text-white">Promoción</h3>
+            <p className="text-gray-400 text-sm">Promovidos por región</p>
           </div>
         </div>
 
