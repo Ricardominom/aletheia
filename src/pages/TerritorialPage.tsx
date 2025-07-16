@@ -37,12 +37,9 @@ const generateRegionData = () => {
 };
 
 export default function TerritorialPage() {
-  const [selectedRegion, setSelectedRegion] = useState('cochabamba');
   const [showCompetition, setShowCompetition] = useState(false);
 
   const getTerritorialData = useDashboardStore(state => state.getTerritorialData);
-
-  const currentRegion = BOLIVIA_REGIONS.find(r => r.id === selectedRegion);
 
   // Calcular progreso por región para la competencia
   const getRegionProgress = (regionId: string) => {
@@ -84,40 +81,6 @@ export default function TerritorialPage() {
               <Trophy className="w-5 h-5" />
               <span>Competencia Regional</span>
             </button>
-
-            {/* Selector de región */}
-            <div className="flex items-center gap-3">
-              <span className="text-gray-400">Región:</span>
-              <select
-                value={selectedRegion}
-                onChange={(e) => setSelectedRegion(e.target.value)}
-                className="bg-card/80 border border-primary/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary/40 transition-colors min-w-[200px]"
-              >
-                {BOLIVIA_REGIONS.map((region) => (
-                  <option key={region.id} value={region.id}>
-                    {region.name} ({region.location})
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
-
-        {/* Indicador de región actual */}
-        <div className="glassmorphic-container p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-3 bg-accent-teal rounded-full animate-pulse"></div>
-              <span className="text-white font-medium">
-                Mostrando datos de: <span className="text-accent-teal">{currentRegion?.name}</span>
-              </span>
-              <span className="text-gray-400">({currentRegion?.location})</span>
-            </div>
-            <div className="text-sm text-gray-400">
-              Cumplimiento de Metas: <span className="text-accent-teal font-medium">
-                {getRegionProgress(selectedRegion).toFixed(1)}%
-              </span>
-            </div>
           </div>
         </div>
 
@@ -133,17 +96,11 @@ export default function TerritorialPage() {
               {rankedRegions.map((region, index) => {
                 const isLeader = index === 0;
                 const isLast = index === rankedRegions.length - 1;
-                const isSelected = region.id === selectedRegion;
                 
                 return (
                   <div
                     key={region.id}
-                    className={`relative p-4 rounded-lg border transition-all duration-300 cursor-pointer ${
-                      isSelected 
-                        ? 'border-accent-teal/50 bg-accent-teal/10' 
-                        : 'border-primary/20 bg-card/50 hover:border-primary/40'
-                    }`}
-                    onClick={() => setSelectedRegion(region.id)}
+                    className="relative p-4 rounded-lg border transition-all duration-300 border-primary/20 bg-card/50 hover:border-primary/40"
                   >
                     {/* Posición */}
                     <div className="flex items-center justify-between mb-3">
@@ -226,31 +183,21 @@ export default function TerritorialPage() {
         <div className="grid grid-cols-12 gap-8">
           {/* Primera fila - cards más grandes */}
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <ElectoralStructureCard 
-              selectedRegion={selectedRegion}
-            />
+            <ElectoralStructureCard />
           </div>
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <EventsCard 
-              selectedRegion={selectedRegion}
-            />
+            <EventsCard />
           </div>
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <PromotionCard 
-              selectedRegion={selectedRegion}
-            />
+            <PromotionCard />
           </div>
           
           {/* Segunda fila - cards más pequeñas */}
           <div className="col-span-12 md:col-span-6">
-            <SegmentCampaignCard 
-              selectedRegion={selectedRegion}
-            />
+            <SegmentCampaignCard />
           </div>
           <div className="col-span-12 md:col-span-6">
-            <MobilizationCard 
-              selectedRegion={selectedRegion}
-            />
+            <MobilizationCard />
           </div>
         </div>
       </div>
