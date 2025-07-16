@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Users } from 'lucide-react';
 import SegmentCampaignModal from './SegmentCampaignModal';
 import { BOLIVIA_REGIONS } from '../../pages/TerritorialPage';
+import { useDashboardStore } from '../../store/dashboardStore';
 
 interface Segment {
   id: string;
@@ -15,16 +16,25 @@ interface SegmentCampaignCardProps {
 
 export default function SegmentCampaignCard({ selectedRegion, regionData }: SegmentCampaignCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [segments, setSegments] = useState<Segment[]>([
-    { id: '1', name: 'Ambientalistas' },
-    { id: '2', name: 'Mayores de edad' },
-    { id: '3', name: 'Mujeres embarazadas' },
-  ]);
+  
+  const { getTerritorialData, addSegment } = useDashboardStore(state => ({
+    getTerritorialData: state.getTerritorialData,
+    addSegment: state.addSegment,
+  }));
+
+  // Get data for current region
+  const currentRegionData = selectedRegion ? getTerritorialData(selectedRegion) : null;
+  const segments = currentRegionData?.segments || [];
 
   // Usar datos de la región si están disponibles
   const currentSegments = regionData?.segments || segments.length;
   const currentRegion = BOLIVIA_REGIONS.find(r => r.id === selectedRegion);
 
+  const handleAddSegment = (segment: Omit<Segment, 'id'>) => {
+    if (selectedRegion) {
+      addSegment(selectedRegion, segment);
+    }
+  };
   return (
     <>
       <div 
@@ -62,7 +72,7 @@ export default function SegmentCampaignCard({ selectedRegion, regionData }: Segm
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         segments={segments}
-        onAddSegment={(segment) => setSegments([...segments, segment])}
+        onAddSegment={handleAddSegment}
       />
     </>
   );

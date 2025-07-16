@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Users, Calendar, Settings } from 'lucide-react';
 import ElectoralStructureModal from './ElectoralStructureModal';
 import { BOLIVIA_REGIONS } from '../../pages/TerritorialPage';
+import { useDashboardStore } from '../../store/dashboardStore';
 
 interface Defender {
   id: string;
@@ -18,10 +19,19 @@ interface ElectoralStructureCardProps {
 
 export default function ElectoralStructureCard({ selectedRegion, regionData }: ElectoralStructureCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [defenders, setDefenders] = useState<Defender[]>([]);
-  const [electionDate, setElectionDate] = useState<string>('2025-05-01');
-  const [targetDefenders, setTargetDefenders] = useState<number>(1000);
-  const [hasInitialConfig, setHasInitialConfig] = useState(false);
+  
+  const { getTerritorialData, addDefender, updateElectionConfig } = useDashboardStore(state => ({
+    getTerritorialData: state.getTerritorialData,
+    addDefender: state.addDefender,
+    updateElectionConfig: state.updateElectionConfig,
+  }));
+
+  // Get data for current region
+  const currentRegionData = selectedRegion ? getTerritorialData(selectedRegion) : null;
+  const defenders = currentRegionData?.defenders || [];
+  const electionDate = currentRegionData?.electionDate || '2025-05-01';
+  const targetDefenders = currentRegionData?.targetDefenders || 1000;
+  const hasInitialConfig = currentRegionData ? Object.keys(currentRegionData).length > 0 : false;
 
   // Usar datos de la región si están disponibles
   const currentDefenders = regionData?.defenders || defenders.length;
@@ -34,9 +44,27 @@ export default function ElectoralStructureCard({ selectedRegion, regionData }: E
   );
 
   const handleInitialConfig = (date: string, target: number) => {
-    setElectionDate(date);
-    setTargetDefenders(target);
-    setHasInitialConfig(true);
+    if (selectedRegion) {
+      updateElectionConfig(selectedRegion, { electionDate: date, targetDefenders: target });
+    }
+  };
+
+  const handleAddDefender = (defender: Omit<Defender, 'id'>) => {
+    if (selectedRegion) {
+      addDefender(selectedRegion, defender);
+    }
+  };
+
+  const handleUpdateElectionDate = (date: string) => {
+    if (selectedRegion) {
+      updateElectionConfig(selectedRegion, { electionDate: date, targetDefenders });
+    }
+  };
+
+  const handleUpdateTargetDefenders = (target: number) => {
+    if (selectedRegion) {
+      updateElectionConfig(selectedRegion, { electionDate, targetDefenders: target });
+    }
   };
 
   return (
@@ -99,11 +127,11 @@ export default function ElectoralStructureCard({ selectedRegion, regionData }: E
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         defenders={defenders}
-        onAddDefender={(defender) => setDefenders([...defenders, defender])}
+        onAddDefender={handleAddDefender}
         electionDate={electionDate}
-        onUpdateElectionDate={setElectionDate}
+        onUpdateElectionDate={handleUpdateElectionDate}
         targetDefenders={targetDefenders}
-        onUpdateTargetDefenders={setTargetDefenders}
+        onUpdateTargetDefenders={handleUpdateTargetDefenders}
         hasInitialConfig={hasInitialConfig}
         onInitialConfig={handleInitialConfig}
       />

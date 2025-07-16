@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Calendar } from 'lucide-react';
 import EventsModal from './EventsModal';
 import { BOLIVIA_REGIONS } from '../../pages/TerritorialPage';
+import { useDashboardStore } from '../../store/dashboardStore';
 
 interface Event {
   id: string;
@@ -17,7 +18,15 @@ interface EventsCardProps {
 
 export default function EventsCard({ selectedRegion, regionData }: EventsCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [events, setEvents] = useState<Event[]>([]);
+  
+  const { getTerritorialData, addEvent } = useDashboardStore(state => ({
+    getTerritorialData: state.getTerritorialData,
+    addEvent: state.addEvent,
+  }));
+
+  // Get data for current region
+  const currentRegionData = selectedRegion ? getTerritorialData(selectedRegion) : null;
+  const events = currentRegionData?.events || [];
 
   // Usar datos de la región si están disponibles
   const currentEvents = regionData?.events || events.length;
@@ -40,6 +49,11 @@ export default function EventsCard({ selectedRegion, regionData }: EventsCardPro
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   }, [nearestEvent]);
 
+  const handleAddEvent = (event: Omit<Event, 'id'>) => {
+    if (selectedRegion) {
+      addEvent(selectedRegion, event);
+    }
+  };
   return (
     <>
       <div 
@@ -106,7 +120,7 @@ export default function EventsCard({ selectedRegion, regionData }: EventsCardPro
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         events={events}
-        onAddEvent={(event) => setEvents([...events, event])}
+        onAddEvent={handleAddEvent}
       />
     </>
   );

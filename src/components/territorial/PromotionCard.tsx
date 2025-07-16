@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Users } from 'lucide-react';
 import PromotionModal from './PromotionModal';
 import { BOLIVIA_REGIONS } from '../../pages/TerritorialPage';
+import { useDashboardStore } from '../../store/dashboardStore';
 
 interface PromotionCardProps {
   selectedRegion?: string;
@@ -10,8 +11,17 @@ interface PromotionCardProps {
 
 export default function PromotionCard({ selectedRegion, regionData }: PromotionCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [promotedCount, setPromotedCount] = useState(0);
-  const [targetPromoters, setTargetPromoters] = useState<number>(500);
+  
+  const { getTerritorialData, updatePromotedCount, updateTargetPromoters } = useDashboardStore(state => ({
+    getTerritorialData: state.getTerritorialData,
+    updatePromotedCount: state.updatePromotedCount,
+    updateTargetPromoters: state.updateTargetPromoters,
+  }));
+
+  // Get data for current region
+  const currentRegionData = selectedRegion ? getTerritorialData(selectedRegion) : null;
+  const promotedCount = currentRegionData?.promotedCount || 0;
+  const targetPromoters = currentRegionData?.targetPromoters || 500;
 
   // Usar datos de la región si están disponibles
   const currentPromoted = regionData?.promotedCount || promotedCount;
@@ -20,6 +30,17 @@ export default function PromotionCard({ selectedRegion, regionData }: PromotionC
 
   const progress = ((currentPromoted / currentTarget) * 100).toFixed(1);
 
+  const handleUpdatePromotedCount = (count: number) => {
+    if (selectedRegion) {
+      updatePromotedCount(selectedRegion, count);
+    }
+  };
+
+  const handleUpdateTargetPromoters = (target: number) => {
+    if (selectedRegion) {
+      updateTargetPromoters(selectedRegion, target);
+    }
+  };
   return (
     <>
       <div 
@@ -70,9 +91,9 @@ export default function PromotionCard({ selectedRegion, regionData }: PromotionC
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         promotedCount={promotedCount}
-        onUpdatePromotedCount={setPromotedCount}
+        onUpdatePromotedCount={handleUpdatePromotedCount}
         targetPromoters={targetPromoters}
-        onUpdateTargetPromoters={setTargetPromoters}
+        onUpdateTargetPromoters={handleUpdateTargetPromoters}
       />
     </>
   );

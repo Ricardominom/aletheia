@@ -90,6 +90,31 @@ interface DashboardState {
     fechaCreacion: Date;
   }>;
 
+  // Territorial data by region
+  territorialData: Record<string, {
+    defenders: Array<{
+      id: string;
+      name: string;
+      phone: string;
+      email: string;
+      pollingStation?: string;
+    }>;
+    events: Array<{
+      id: string;
+      title: string;
+      date: string;
+      expectedAttendees: number;
+      actualAttendees: number;
+    }>;
+    promotedCount: number;
+    targetPromoters: number;
+    segments: Array<{
+      id: string;
+      name: string;
+    }>;
+    targetDefenders: number;
+    electionDate: string;
+  }>;
   // Actions
   setCurrentUser: (user: 'admin' | 'editor' | null) => void;
   updateProfile: (data: Partial<DashboardState['profile']>) => void;
@@ -105,6 +130,15 @@ interface DashboardState {
   setHasHydrated: (state: boolean) => void;
   addAviso: (aviso: Omit<DashboardState['avisosCochabamba'][0], 'id' | 'fechaCreacion'>) => void;
   deleteAviso: (id: string) => void;
+  
+  // Territorial actions
+  addDefender: (regionId: string, defender: Omit<DashboardState['territorialData'][string]['defenders'][0], 'id'>) => void;
+  addEvent: (regionId: string, event: Omit<DashboardState['territorialData'][string]['events'][0], 'id'>) => void;
+  updatePromotedCount: (regionId: string, count: number) => void;
+  updateTargetPromoters: (regionId: string, target: number) => void;
+  addSegment: (regionId: string, segment: Omit<DashboardState['territorialData'][string]['segments'][0], 'id'>) => void;
+  updateElectionConfig: (regionId: string, config: { electionDate: string; targetDefenders: number }) => void;
+  getTerritorialData: (regionId: string) => DashboardState['territorialData'][string];
 }
 
 // Default state factory
@@ -220,6 +254,8 @@ const createDefaultState = () => ({
     }
   ],
 });
+  territorialData: {},
+});
 
 export const useDashboardStore = create<DashboardState>()(
   persist(
@@ -320,6 +356,167 @@ export const useDashboardStore = create<DashboardState>()(
         set((state) => ({
           avisosCochabamba: state.avisosCochabamba.filter(aviso => aviso.id !== id)
         })),
+      
+      // Territorial actions
+      addDefender: (regionId, defenderData) =>
+        set((state) => {
+          const regionData = state.territorialData[regionId] || {
+            defenders: [],
+            events: [],
+            promotedCount: 0,
+            targetPromoters: 500,
+            segments: [],
+            targetDefenders: 1000,
+            electionDate: '2025-05-01'
+          };
+          
+          return {
+            territorialData: {
+              ...state.territorialData,
+              [regionId]: {
+                ...regionData,
+                defenders: [
+                  ...regionData.defenders,
+                  { ...defenderData, id: Date.now().toString() }
+                ]
+              }
+            }
+          };
+        }),
+      
+      addEvent: (regionId, eventData) =>
+        set((state) => {
+          const regionData = state.territorialData[regionId] || {
+            defenders: [],
+            events: [],
+            promotedCount: 0,
+            targetPromoters: 500,
+            segments: [],
+            targetDefenders: 1000,
+            electionDate: '2025-05-01'
+          };
+          
+          return {
+            territorialData: {
+              ...state.territorialData,
+              [regionId]: {
+                ...regionData,
+                events: [
+                  ...regionData.events,
+                  { ...eventData, id: Date.now().toString() }
+                ]
+              }
+            }
+          };
+        }),
+      
+      updatePromotedCount: (regionId, count) =>
+        set((state) => {
+          const regionData = state.territorialData[regionId] || {
+            defenders: [],
+            events: [],
+            promotedCount: 0,
+            targetPromoters: 500,
+            segments: [],
+            targetDefenders: 1000,
+            electionDate: '2025-05-01'
+          };
+          
+          return {
+            territorialData: {
+              ...state.territorialData,
+              [regionId]: {
+                ...regionData,
+                promotedCount: count
+              }
+            }
+          };
+        }),
+      
+      updateTargetPromoters: (regionId, target) =>
+        set((state) => {
+          const regionData = state.territorialData[regionId] || {
+            defenders: [],
+            events: [],
+            promotedCount: 0,
+            targetPromoters: 500,
+            segments: [],
+            targetDefenders: 1000,
+            electionDate: '2025-05-01'
+          };
+          
+          return {
+            territorialData: {
+              ...state.territorialData,
+              [regionId]: {
+                ...regionData,
+                targetPromoters: target
+              }
+            }
+          };
+        }),
+      
+      addSegment: (regionId, segmentData) =>
+        set((state) => {
+          const regionData = state.territorialData[regionId] || {
+            defenders: [],
+            events: [],
+            promotedCount: 0,
+            targetPromoters: 500,
+            segments: [],
+            targetDefenders: 1000,
+            electionDate: '2025-05-01'
+          };
+          
+          return {
+            territorialData: {
+              ...state.territorialData,
+              [regionId]: {
+                ...regionData,
+                segments: [
+                  ...regionData.segments,
+                  { ...segmentData, id: Date.now().toString() }
+                ]
+              }
+            }
+          };
+        }),
+      
+      updateElectionConfig: (regionId, config) =>
+        set((state) => {
+          const regionData = state.territorialData[regionId] || {
+            defenders: [],
+            events: [],
+            promotedCount: 0,
+            targetPromoters: 500,
+            segments: [],
+            targetDefenders: 1000,
+            electionDate: '2025-05-01'
+          };
+          
+          return {
+            territorialData: {
+              ...state.territorialData,
+              [regionId]: {
+                ...regionData,
+                ...config
+              }
+            }
+          };
+        }),
+      
+      getTerritorialData: (regionId) => {
+        const state = get();
+        return state.territorialData[regionId] || {
+          defenders: [],
+          events: [],
+          promotedCount: 0,
+          targetPromoters: 500,
+          segments: [],
+          targetDefenders: 1000,
+          electionDate: '2025-05-01'
+        };
+      },
     }),
     {
       name: 'dashboard-storage',
@@ -336,6 +533,7 @@ export const useDashboardStore = create<DashboardState>()(
         operationProgress: state.operationProgress,
         operationMetrics: state.operationMetrics,
         avisosCochabamba: state.avisosCochabamba,
+        territorialData: state.territorialData,
       }),
       onRehydrateStorage: () => (state) => {
         // Ensure hydration is marked as complete
