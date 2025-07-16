@@ -211,7 +211,9 @@ export default function TerritorialPage() {
 
                     {/* Badge de líder */}
                     {isLeader && (
-                      ></div>
+                      <div className="absolute -top-2 -right-2 bg-yellow-500 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full border-2 border-yellow-400">
+                        👑 Líder
+                      </div>
                     )}
                   </div>
                 );
