@@ -53,14 +53,14 @@ export default function PromotionCard() {
 
   return (
     <>
-      <div className="glassmorphic-container p-6 min-h-[400px] flex flex-col">
+      <div className="glassmorphic-container p-4 min-h-[300px] flex flex-col">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="bg-accent-pink/10 p-3 rounded-lg">
+            <div className="bg-accent-pink/10 p-2 rounded-lg">
               <Users className="w-6 h-6 text-accent-pink" />
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-white">Promoción</h3>
+              <h3 className="text-lg font-semibold text-white">Promoción</h3>
               <p className="text-gray-400 text-sm">Promovidos por región</p>
             </div>
           </div>
@@ -93,7 +93,7 @@ export default function PromotionCard() {
         </div>
 
         {/* Lista de regiones con scroll */}
-        <div className="flex-1 overflow-y-auto pr-2 space-y-3" style={{ maxHeight: '280px' }}>
+        <div className="flex-1 overflow-y-auto pr-2 space-y-2" style={{ maxHeight: '180px' }}>
           {regionsData.map((region, index) => {
             const isTop = index < 3;
             const rankColors = ['text-yellow-400', 'text-gray-300', 'text-orange-400'];
@@ -103,9 +103,9 @@ export default function PromotionCard() {
               <div
                 key={region.id}
                 onClick={() => handleRegionClick(region.id)}
-                className="bg-card/50 border border-primary/20 rounded-lg p-4 hover:border-primary/40 transition-all duration-300 cursor-pointer group"
+                className="bg-card/50 border border-primary/20 rounded-lg p-3 hover:border-primary/40 transition-all duration-300 cursor-pointer group"
               >
-                <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-3">
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold ${rankColor} bg-current/10`}>
                       #{index + 1}
@@ -128,7 +128,7 @@ export default function PromotionCard() {
                 </div>
                 
                 {/* Barra de progreso */}
-                <div className="h-2 bg-background/50 rounded-lg overflow-hidden">
+                <div className="h-1.5 bg-background/50 rounded-lg overflow-hidden">
                   <div 
                     className="h-full bg-accent-pink transition-all duration-300"
                     style={{ width: `${Math.min(region.progress, 100)}%` }}

@@ -4,14 +4,14 @@ import { BOLIVIA_REGIONS } from '../../pages/TerritorialPage';
 
 export default function MobilizationCard() {
   return (
-    <div className="glassmorphic-container p-6 min-h-[400px]">
+    <div className="glassmorphic-container p-4 min-h-[300px]">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="bg-primary/10 p-3 rounded-lg">
+          <div className="bg-primary/10 p-2 rounded-lg">
             <Users className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h3 className="text-xl font-semibold text-white">Movilización</h3>
+            <h3 className="text-lg font-semibold text-white">Movilización</h3>
             <p className="text-gray-400 text-sm">Próximamente</p>
           </div>
         </div>
