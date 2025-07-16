@@ -253,7 +253,7 @@ const createDefaultState = () => ({
       fechaCreacion: new Date('2025-01-22T11:45:00')
     }
   ],
-});
+  
   territorialData: {},
 });
 
