@@ -67,21 +67,6 @@ export default function TerritorialPage() {
             <h1 className="text-3xl font-bold text-white mb-2">Territorial</h1>
             <p className="text-gray-400">Gestión territorial por regiones de Bolivia</p>
           </div>
-          
-          <div className="flex items-center gap-4">
-            {/* Toggle de competencia */}
-            <button
-              onClick={() => setShowCompetition(!showCompetition)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                showCompetition 
-                  ? 'bg-accent-teal/20 border border-accent-teal/40 text-accent-teal' 
-                  : 'bg-card/50 border border-primary/20 text-gray-400 hover:text-gray-200'
-              }`}
-            >
-              <Trophy className="w-5 h-5" />
-              <span>Competencia Regional</span>
-            </button>
-          </div>
         </div>
 
         {/* Panel de competencia regional */}
