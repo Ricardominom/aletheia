@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Users, ChevronDown, ChevronUp } from 'lucide-react';
+import { Users, Target } from 'lucide-react';
 import PromotionModal from './PromotionModal';
 import { BOLIVIA_REGIONS } from '../../pages/TerritorialPage';
 import { useDashboardStore } from '../../store/dashboardStore';
@@ -7,7 +7,6 @@ import { useDashboardStore } from '../../store/dashboardStore';
 export default function PromotionCard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
-  const [isExpanded, setIsExpanded] = useState(false);
   
   const { getTerritorialData, updatePromotedCount, updateTargetPromoters } = useDashboardStore(state => ({
     getTerritorialData: state.getTerritorialData,
@@ -28,8 +27,10 @@ export default function PromotionCard() {
     };
   }).sort((a, b) => b.progress - a.progress);
 
-  // Mostrar top 3 por defecto, todas si está expandido
-  const displayedRegions = isExpanded ? regionsData : regionsData.slice(0, 3);
+  // Calcular totales generales
+  const totalPromoted = regionsData.reduce((sum, region) => sum + region.promotedCount, 0);
+  const totalTargetPromoters = regionsData.reduce((sum, region) => sum + region.targetPromoters, 0);
+  const totalProgress = totalTargetPromoters > 0 ? (totalPromoted / totalTargetPromoters) * 100 : 0;
 
   const handleRegionClick = (regionId: string) => {
     setSelectedRegion(regionId);
@@ -52,8 +53,8 @@ export default function PromotionCard() {
 
   return (
     <>
-      <div className="glassmorphic-container p-6 min-h-[400px]">
-        <div className="flex items-center justify-between mb-6">
+      <div className="glassmorphic-container p-6 min-h-[400px] flex flex-col">
+        <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="bg-accent-pink/10 p-3 rounded-lg">
               <Users className="w-6 h-6 text-accent-pink" />
@@ -63,18 +64,37 @@ export default function PromotionCard() {
               <p className="text-gray-400 text-sm">Promovidos por región</p>
             </div>
           </div>
-          
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center gap-2 px-3 py-2 bg-primary/10 border border-primary/30 rounded-lg text-primary hover:bg-primary/20 transition-all duration-300"
-          >
-            <span className="text-sm">{isExpanded ? 'Menos' : 'Ver todas'}</span>
-            {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-          </button>
         </div>
 
-        <div className="space-y-3">
-          {displayedRegions.map((region, index) => {
+        {/* Totales Generales */}
+        <div className="bg-card/50 rounded-lg p-4 border border-accent-pink/20 mb-4">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <Target className="w-5 h-5 text-accent-pink" />
+              <span className="text-white font-medium">Total Nacional</span>
+            </div>
+            <div className="text-right">
+              <div className="text-accent-pink font-bold text-xl">
+                {totalPromoted}/{totalTargetPromoters}
+              </div>
+              <div className="text-xs text-gray-400">
+                {totalProgress.toFixed(1)}%
+              </div>
+            </div>
+          </div>
+          
+          {/* Barra de progreso total */}
+          <div className="h-3 bg-background/50 rounded-lg overflow-hidden">
+            <div 
+              className="h-full bg-accent-pink transition-all duration-300"
+              style={{ width: `${Math.min(totalProgress, 100)}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Lista de regiones con scroll */}
+        <div className="flex-1 overflow-y-auto pr-2 space-y-3" style={{ maxHeight: '280px' }}>
+          {regionsData.map((region, index) => {
             const isTop = index < 3;
             const rankColors = ['text-yellow-400', 'text-gray-300', 'text-orange-400'];
             const rankColor = isTop ? rankColors[index] : 'text-gray-400';
@@ -118,17 +138,6 @@ export default function PromotionCard() {
             );
           })}
         </div>
-
-        {!isExpanded && regionsData.length > 3 && (
-          <div className="mt-4 text-center">
-            <button
-              onClick={() => setIsExpanded(true)}
-              className="text-sm text-primary hover:text-primary/80 transition-colors"
-            >
-              +{regionsData.length - 3} regiones más
-            </button>
-          </div>
-        )}
       </div>
 
       {selectedRegion && selectedRegionData && (
