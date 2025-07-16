@@ -4,7 +4,7 @@ import { BOLIVIA_REGIONS } from '../../pages/TerritorialPage';
 
 export default function MobilizationCard() {
   return (
-    <div className="glassmorphic-container p-4 min-h-[300px]">
+    <div className="glassmorphic-container p-4 h-[300px] flex flex-col">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="bg-primary/10 p-2 rounded-lg">
@@ -25,13 +25,13 @@ export default function MobilizationCard() {
         </button>
       </div>
 
-      <div className="space-y-3">
+      <div className="flex-1 overflow-y-auto pr-2 space-y-2" style={{ maxHeight: '180px' }}>
         {BOLIVIA_REGIONS.slice(0, 3).map((region, index) => (
           <div
             key={region.id}
-            className="bg-card/30 border border-gray-700 rounded-lg p-4 opacity-50"
+            className="bg-card/30 border border-gray-700 rounded-lg p-3 opacity-50"
           >
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-3">
                 <div className="w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold text-gray-500 bg-gray-500/10">
                   #{index + 1}
@@ -51,7 +51,7 @@ export default function MobilizationCard() {
               </div>
             </div>
             
-            <div className="h-2 bg-background/30 rounded-lg overflow-hidden">
+            <div className="h-1.5 bg-background/30 rounded-lg overflow-hidden">
               <div className="h-full bg-gray-600/30 w-0" />
             </div>
           </div>
