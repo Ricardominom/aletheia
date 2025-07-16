@@ -1,19 +1,29 @@
 import React, { useState } from 'react';
 import { Users } from 'lucide-react';
 import SegmentCampaignModal from './SegmentCampaignModal';
+import { BOLIVIA_REGIONS } from '../../pages/TerritorialPage';
 
 interface Segment {
   id: string;
   name: string;
 }
 
-export default function SegmentCampaignCard() {
+interface SegmentCampaignCardProps {
+  selectedRegion?: string;
+  regionData?: any;
+}
+
+export default function SegmentCampaignCard({ selectedRegion, regionData }: SegmentCampaignCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [segments, setSegments] = useState<Segment[]>([
     { id: '1', name: 'Ambientalistas' },
     { id: '2', name: 'Mayores de edad' },
     { id: '3', name: 'Mujeres embarazadas' },
   ]);
+
+  // Usar datos de la región si están disponibles
+  const currentSegments = regionData?.segments || segments.length;
+  const currentRegion = BOLIVIA_REGIONS.find(r => r.id === selectedRegion);
 
   return (
     <>
@@ -24,7 +34,14 @@ export default function SegmentCampaignCard() {
         <div className="flex items-start justify-between">
           <div className="space-y-3">
             <h3 className="text-2xl font-semibold text-white">Campaña por Segmento</h3>
-            <p className="text-gray-400 text-base">Segmentos definidos</p>
+            <p className="text-gray-400 text-base">
+              Segmentos definidos
+              {currentRegion && (
+                <span className="block text-sm text-primary">
+                  {currentRegion.name} ({currentRegion.location})
+                </span>
+              )}
+            </p>
           </div>
           <div className="relative">
             <div className="absolute -inset-4 bg-primary/20 rounded-full blur-xl group-hover:bg-primary/30 transition-colors duration-300"></div>
@@ -36,7 +53,7 @@ export default function SegmentCampaignCard() {
         
         <div className="mt-8">
           <div className="text-6xl font-bold text-primary text-neon animate-float">
-            {segments.length}
+            {currentSegments}
           </div>
         </div>
       </div>

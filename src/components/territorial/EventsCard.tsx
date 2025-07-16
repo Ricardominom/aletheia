@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Calendar } from 'lucide-react';
 import EventsModal from './EventsModal';
+import { BOLIVIA_REGIONS } from '../../pages/TerritorialPage';
 
 interface Event {
   id: string;
@@ -9,9 +10,18 @@ interface Event {
   expectedAttendees: number;
 }
 
-export default function EventsCard() {
+interface EventsCardProps {
+  selectedRegion?: string;
+  regionData?: any;
+}
+
+export default function EventsCard({ selectedRegion, regionData }: EventsCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [events, setEvents] = useState<Event[]>([]);
+
+  // Usar datos de la región si están disponibles
+  const currentEvents = regionData?.events || events.length;
+  const currentRegion = BOLIVIA_REGIONS.find(r => r.id === selectedRegion);
 
   // Get the nearest upcoming event
   const nearestEvent = useMemo(() => {
@@ -39,7 +49,14 @@ export default function EventsCard() {
         <div className="flex items-start justify-between">
           <div className="space-y-3">
             <h3 className="text-2xl font-semibold text-white">Eventos</h3>
-            <p className="text-gray-400 text-base">Próximo evento</p>
+            <p className="text-gray-400 text-base">
+              {currentEvents} eventos programados
+              {currentRegion && (
+                <span className="block text-sm text-primary">
+                  {currentRegion.name} ({currentRegion.location})
+                </span>
+              )}
+            </p>
           </div>
           <div className="relative">
             <div className="absolute -inset-4 bg-primary/20 rounded-full blur-xl group-hover:bg-primary/30 transition-colors duration-300"></div>
@@ -49,7 +66,7 @@ export default function EventsCard() {
           </div>
         </div>
         
-        {nearestEvent ? (
+        {nearestEvent && !regionData ? (
           <div className="mt-8 space-y-4">
             <div className="text-2xl font-bold text-primary text-neon">
               {nearestEvent.title}
@@ -74,8 +91,13 @@ export default function EventsCard() {
             </div>
           </div>
         ) : (
-          <div className="mt-8 text-gray-400">
-            No hay eventos próximos programados
+          <div className="mt-8 space-y-4">
+            <div className="text-6xl font-bold text-primary text-neon animate-float">
+              {currentEvents}
+            </div>
+            <div className="text-sm text-gray-400">
+              Eventos programados en la región
+            </div>
           </div>
         )}
       </div>
