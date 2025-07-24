@@ -174,17 +174,6 @@ export default function LoginPage() {
                 'Iniciar sesión'
               )}
             </motion.button>
-
-            <div className="mt-4 text-center space-y-2">
-              <p className="text-xs text-gray-400">
-                Administrador: <span className="text-white">admin</span> | 
-                Contraseña: <span className="text-white">1234admin</span>
-              </p>
-              <p className="text-xs text-gray-400">
-                Editor: <span className="text-white">editor</span> | 
-                Contraseña: <span className="text-white">1234editor</span>
-              </p>
-            </div>
           </form>
         </div>
       </motion.div>
