@@ -12,32 +12,7 @@ interface Event {
 export default function StrategicCalendarCard() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [events, setEvents] = useState<Event[]>([
-    {
-      id: '1',
-      title: 'Reunión estratégica',
-      date: '2025-05-20',
-      completed: false,
-    },
-    {
-      id: '2',
-      title: 'Debate con opositores',
-      date: '2025-05-20',
-      completed: false,
-    },
-    {
-      id: '3',
-      title: 'Evento comunitario',
-      date: '2025-05-30',
-      completed: false,
-    },
-        {
-      id: '4',
-      title: 'Evento dia de madres',
-      date: '2025-05-10',
-      completed: true,
-    },
-  ]);
+  const [events, setEvents] = useState<Event[]>([]);
   
   const monthNames = [
     'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',

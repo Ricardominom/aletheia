@@ -11,20 +11,7 @@ interface EarnedMedia {
 
 export default function EarnedMediaCard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [earnedMedia, setEarnedMedia] = useState<EarnedMedia[]>([
-    {
-      id: '1',
-      title: 'Cobertura especial del evento central',
-      url: 'https://ejemplo.com/cobertura',
-      media: 'Los Tiempos',
-    },
-    {
-      id: '2',
-      title: 'Entrevista sobre propuestas municipales',
-      url: 'https://ejemplo.com/entrevista-municipal',
-      media: 'Opinión',
-    },
-  ]);
+  const [earnedMedia, setEarnedMedia] = useState<EarnedMedia[]>([]);
 
   return (
     <>

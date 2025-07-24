@@ -22,49 +22,7 @@ interface Encuesta {
 }
 
 export default function EncuestasPage() {
-  const [encuestas, setEncuestas] = useState<Encuesta[]>([
-    {
-      id: '1',
-      nombre: 'Encuesta Municipal Enero 2025',
-      fecha: '2025-01-20',
-      empresa: 'Encuestadora Nacional',
-      candidatos: [
-        {
-          id: '1',
-          nombre: 'CANDIDATO PROPIO',
-          intencionVoto: 47.0,
-          varianzaIntencion: 2.5,
-          varianzaConocimiento: 1.8,
-          varianzaSaldoOpinion: -1.2
-        },
-        {
-          id: '2',
-          nombre: 'OPOSITOR 1',
-          intencionVoto: 9.0,
-          varianzaIntencion: -0.5,
-          varianzaConocimiento: 0.3,
-          varianzaSaldoOpinion: -2.1
-        },
-        {
-          id: '3',
-          nombre: 'OPOSITOR 2',
-          intencionVoto: 7.0,
-          varianzaIntencion: -0.8,
-          varianzaConocimiento: -0.2,
-          varianzaSaldoOpinion: -1.5
-        },
-        {
-          id: '4',
-          nombre: 'NO SABE/NO CONTESTÓ',
-          intencionVoto: 37.0,
-          varianzaIntencion: -1.2,
-          varianzaConocimiento: 0.0,
-          varianzaSaldoOpinion: 0.0
-        }
-      ],
-      fechaCreacion: new Date('2025-01-20T10:00:00')
-    }
-  ]);
+  const [encuestas, setEncuestas] = useState<Encuesta[]>([]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const updateTacticalData = useDashboardStore(state => state.updateTacticalData);

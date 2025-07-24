@@ -11,20 +11,7 @@ interface Spokesperson {
 
 export default function SpokespersonCard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [spokespersons, setSpokespersons] = useState<Spokesperson[]>([
-    {
-      id: '1',
-      name: 'Juan Carlos Pérez',
-      email: 'jperez@ejemplo.com',
-      phone: '+591 77712345',
-    },
-    {
-      id: '2',
-      name: 'María González',
-      email: 'mgonzalez@ejemplo.com',
-      phone: '+591 77798765',
-    },
-  ]);
+  const [spokespersons, setSpokespersons] = useState<Spokesperson[]>([]);
 
   return (
     <>

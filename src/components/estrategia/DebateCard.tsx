@@ -10,23 +10,7 @@ interface DebateTheme {
 
 export default function DebateCard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [themes, setThemes] = useState<DebateTheme[]>([
-    {
-      id: '1',
-      title: 'Desarrollo Urbano',
-      strategy: 'Enfatizar el plan de modernización de infraestructura',
-    },
-    {
-      id: '2',
-      title: 'Seguridad Ciudadana',
-      strategy: 'Presentar estadísticas de reducción de delincuencia',
-    },
-    {
-      id: '3',
-      title: 'Medio Ambiente',
-      strategy: 'Destacar proyectos de áreas verdes y gestión de residuos',
-    },
-  ]);
+  const [themes, setThemes] = useState<DebateTheme[]>([]);
 
   return (
     <>

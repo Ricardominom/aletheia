@@ -23,55 +23,9 @@ interface Actualizacion {
 }
 
 export default function AdversariosTable() {
-  const [adversarios, setAdversarios] = useState<Adversario[]>([
-    {
-      id: '1',
-      nombre: 'Carlos Mendoza',
-      partido: 'Partido Opositor A',
-      descripcion: 'Candidato principal de la oposición con experiencia en gestión municipal',
-      fechaCreacion: new Date('2025-01-20T10:00:00')
-    },
-    {
-      id: '2',
-      nombre: 'Ana Rodríguez',
-      partido: 'Movimiento Ciudadano',
-      descripcion: 'Líder del movimiento ciudadano independiente',
-      fechaCreacion: new Date('2025-01-18T15:30:00')
-    }
-  ]);
+  const [adversarios, setAdversarios] = useState<Adversario[]>([]);
 
-  const [actualizaciones, setActualizaciones] = useState<Actualizacion[]>([
-    {
-      id: '1',
-      adversarioId: '1',
-      adversarioNombre: 'Carlos Mendoza',
-      mensaje: 'Realizó declaraciones controversiales sobre el presupuesto municipal que generaron críticas en redes sociales.',
-      tipo: 'positiva',
-      fecha: '2025-01-23',
-      hora: '14:30',
-      fechaCreacion: new Date('2025-01-23T14:30:00')
-    },
-    {
-      id: '2',
-      adversarioId: '2',
-      adversarioNombre: 'Ana Rodríguez',
-      mensaje: 'Presentó propuesta de mejora en transporte público que fue bien recibida por la ciudadanía.',
-      tipo: 'negativa',
-      fecha: '2025-01-22',
-      hora: '16:00',
-      fechaCreacion: new Date('2025-01-22T16:00:00')
-    },
-    {
-      id: '3',
-      adversarioId: '1',
-      adversarioNombre: 'Carlos Mendoza',
-      mensaje: 'Participó en debate televisivo con propuestas moderadas.',
-      tipo: 'neutral',
-      fecha: '2025-01-21',
-      hora: '20:00',
-      fechaCreacion: new Date('2025-01-21T20:00:00')
-    }
-  ]);
+  const [actualizaciones, setActualizaciones] = useState<Actualizacion[]>([]);
 
   const [isAdversarioModalOpen, setIsAdversarioModalOpen] = useState(false);
   const [isActualizacionModalOpen, setIsActualizacionModalOpen] = useState(false);

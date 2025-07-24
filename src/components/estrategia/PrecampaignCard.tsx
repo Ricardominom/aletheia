@@ -21,58 +21,7 @@ export default function PrecampaignCard() {
     category: 'all',
     priority: 'all',
   });
-  const [requirements, setRequirements] = useState<Requirement[]>([
-    {
-      id: '1',
-      title: 'Registro de candidatura',
-      description: 'Completar el proceso de registro ante el órgano electoral',
-      completed: true,
-      dueDate: '2025-01-15',
-      responsible: 'Juan Pérez',
-      priority: 'high',
-      category: 'legal',
-    },
-    {
-      id: '2',
-      title: 'Presentación de plan de gobierno',
-      description: 'Documento detallado con propuestas y proyectos',
-      completed: true,
-      dueDate: '2025-01-20',
-      responsible: 'María González',
-      priority: 'high',
-      category: 'administrative',
-    },
-    {
-      id: '3',
-      title: 'Validación de documentos',
-      description: 'Revisión y validación de documentación legal',
-      completed: false,
-      dueDate: '2025-02-01',
-      responsible: 'Carlos Rodríguez',
-      priority: 'high',
-      category: 'legal',
-    },
-    {
-      id: '4',
-      title: 'Plan de comunicación',
-      description: 'Estrategia de comunicación para precampaña',
-      completed: false,
-      dueDate: '2025-02-05',
-      responsible: 'Ana Martínez',
-      priority: 'medium',
-      category: 'communication',
-    },
-    {
-      id: '5',
-      title: 'Logística de eventos',
-      description: 'Planificación de eventos de precampaña',
-      completed: false,
-      dueDate: '2025-02-10',
-      responsible: 'Luis Torres',
-      priority: 'medium',
-      category: 'logistics',
-    },
-  ]);
+  const [requirements, setRequirements] = useState<Requirement[]>([]);
 
   const toggleRequirement = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();

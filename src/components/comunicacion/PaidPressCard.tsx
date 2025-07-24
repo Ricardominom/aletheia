@@ -12,22 +12,7 @@ interface PaidPress {
 
 export default function PaidPressCard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [paidPress, setPaidPress] = useState<PaidPress[]>([
-    {
-      id: '1',
-      title: 'Entrevista exclusiva con el candidato',
-      url: 'https://ejemplo.com/entrevista',
-      media: 'El Diario',
-      imageUrl: 'https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg',
-    },
-    {
-      id: '2',
-      title: 'Análisis de propuestas económicas',
-      url: 'https://ejemplo.com/analisis',
-      media: 'La Razón',
-      imageUrl: 'https://images.pexels.com/photos/6953867/pexels-photo-6953867.jpeg',
-    },
-  ]);
+  const [paidPress, setPaidPress] = useState<PaidPress[]>([]);
 
   return (
     <>

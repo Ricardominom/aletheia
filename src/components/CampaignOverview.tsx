@@ -42,7 +42,7 @@ export default function CampaignOverview({ title, subtitle }: CampaignOverviewPr
               alt={profile.name}
               className="w-full h-full object-cover relative z-10 hover:scale-105 transition-transform duration-300"
             />
-            
+              {profile.compliance}
             {/* Hover Glow - more vibrant */}
             <div className="absolute inset-0 bg-gradient-to-t from-accent-teal/30 via-transparent to-accent-pink/30 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
           </div>

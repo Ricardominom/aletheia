@@ -173,32 +173,7 @@ export default function JuridicoPage() {
   const [activeTab, setActiveTab] = useState('contratos');
   const [selectedFolder, setSelectedFolder] = useState<Folder | null>(null);
   const [selectedFile, setSelectedFile] = useState<{ file: File; name: string } | null>(null);
-  const [folders, setFolders] = useState<Folder[]>([
-    {
-      id: '1',
-      name: 'Contrato de Servicios',
-      description: 'Documentación relacionada con contratos de servicios generales',
-      date: '2025-03-22',
-      type: 'contratos',
-      files: []
-    },
-    {
-      id: '2',
-      name: 'Expediente de Defensa 001',
-      description: 'Documentación de expedientes de defensa del primer trimestre',
-      date: '2025-03-23',
-      type: 'expedientes-defensa',
-      files: []
-    },
-    {
-      id: '3',
-      name: 'Expediente de Ofensiva 2025-001',
-      description: 'Expediente de ofensiva del caso principal',
-      date: '2025-03-24',
-      type: 'expedientes-ofensiva',
-      files: []
-    }
-  ]);
+  const [folders, setFolders] = useState<Folder[]>([]);
 
   const handleFileUpload = (formData: FormData) => {
     const files = formData.getAll('files') as File[];
