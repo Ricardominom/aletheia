@@ -145,114 +145,79 @@ interface DashboardState {
 const createDefaultState = () => ({
   profile: {
     name: 'Manfred Reyes Villa',
-    compliance: 27.36,
+    compliance: 0,
     imageUrl: 'https://raw.githubusercontent.com/Nefta11/MiPortafolioNefta/refs/heads/main/assets/Manfred%20Reyes%20Villa.jpg',
   },
   
   timeline: Array.from({ length: 24 }, (_, i) => ({
     week: `S${i + 1}`,
-    planned: 100 + (i * 10),
-    executed: 90 + (i * 9),
+    planned: 0,
+    executed: 0,
   })),
   
   campaignProgress: [
-    { campaign: 'GENERAL', progress: 27.36, trend: 'up' as const },
-    { campaign: 'TERRITORIO', progress: 25.2, trend: 'down' as const },
-    { campaign: 'DIGITAL', progress: 26.8, trend: 'up' as const },
-    { campaign: 'AIRE', progress: 30.1, trend: 'up' as const },
-    { campaign: 'TELEFONÍA', progress: 27.3, trend: 'down' as const },
+    { campaign: 'GENERAL', progress: 0, trend: 'up' as const },
+    { campaign: 'TERRITORIO', progress: 0, trend: 'up' as const },
+    { campaign: 'DIGITAL', progress: 0, trend: 'up' as const },
+    { campaign: 'AIRE', progress: 0, trend: 'up' as const },
+    { campaign: 'TELEFONÍA', progress: 0, trend: 'up' as const },
   ],
   
   indicators: [
-    { type: 'DE LA CAMPAÑA TRANSCURRIDO', value: 55.4 },
-    { type: 'CRECIMIENTO PROMEDIO', value: 5.4 },
-    { type: 'OBJETIVOS DE LA CAMPAÑA', value: 61.1 },
-    { type: 'AVANCE GENERAL', value: 41.4 },
+    { type: 'DE LA CAMPAÑA TRANSCURRIDO', value: 0 },
+    { type: 'CRECIMIENTO PROMEDIO', value: 0 },
+    { type: 'OBJETIVOS DE LA CAMPAÑA', value: 0 },
+    { type: 'AVANCE GENERAL', value: 0 },
   ],
   
   finance: {
-    exercisedBudget: 55.4,
-    accruedBudget: 55.4,
-    scheduleDelay: -5.2,
+    exercisedBudget: 0,
+    accruedBudget: 0,
+    scheduleDelay: 0,
   },
   
-  tacticalData: [
-    { date: '2025-03-22', candidate: 'CANDIDATO PROPIO', percentage: 47.0, trend: 'up' },
-    { date: '2025-03-22', candidate: 'OPOSITOR 1', percentage: 9.0, trend: 'down' },
-    { date: '2025-03-22', candidate: 'OPOSITOR 2', percentage: 7.0, trend: 'down' },
-    { date: '2025-03-22', candidate: 'NO SABE/NO CONTESTÓ', percentage: 37.0, trend: 'up' },
-    { date: '2025-04-12', candidate: 'CANDIDATO PROPIO', percentage: 48.0, trend: 'up' },
-    { date: '2025-04-12', candidate: 'OPOSITOR 1', percentage: 8.5, trend: 'down' },
-    { date: '2025-04-12', candidate: 'OPOSITOR 2', percentage: 6.5, trend: 'down' },
-    { date: '2025-04-12', candidate: 'NO SABE/NO CONTESTÓ', percentage: 45.0, trend: 'up' },
-  ],
+  tacticalData: [],
   
   socialListening: {
-    mentions: 40.0,
-    impressions: 1.3,
-    witnesses: [
-      { username: '@usuario1', content: 'Gran evento hoy en la plaza principal.' },
-      { username: '@usuario2', content: 'Las propuestas presentadas hoy son muy interesantes.' },
-      { username: '@usuario3', content: 'Excelente participación en el debate de hoy.' },
-    ],
+    mentions: 0,
+    impressions: 0,
+    witnesses: [],
   },
   
   operationProgress: Array.from({ length: 12 }, (_, i) => ({
     campaign: i + 1,
-    progress: Math.floor(Math.random() * 60) + 20,
-    delay: Math.floor(Math.random() * 30),
+    progress: 0,
+    delay: 0,
   })),
   
   operationMetrics: [
     {
       area: 'DIGITAL',
-      progress: 31.5,
-      content: { current: 20, target: 30 },
-      impressions: { current: 1000000, target: 1000000 },
+      progress: 0,
+      content: { current: 0, target: 0 },
+      impressions: { current: 0, target: 0 },
     },
     {
       area: 'TELEFONÍA',
-      progress: 31.5,
-      content: { current: 20, target: 30 },
-      impressions: { current: 1000000, target: 1000000 },
+      progress: 0,
+      content: { current: 0, target: 0 },
+      impressions: { current: 0, target: 0 },
     },
     {
       area: 'AIRE',
-      progress: 31.5,
-      content: { current: 20, target: 30 },
-      impressions: { current: 1000000, target: 1000000 },
+      progress: 0,
+      content: { current: 0, target: 0 },
+      impressions: { current: 0, target: 0 },
     },
     {
       area: 'TERRITORIO',
-      progress: 31.5,
-      content: { current: 20, target: 30 },
-      impressions: { current: 1000000, target: 1000000 },
+      progress: 0,
+      content: { current: 0, target: 0 },
+      impressions: { current: 0, target: 0 },
     },
   ],
   
-  avisosCochabamba: [
-    {
-      id: '1',
-      mensaje: 'Reunión de coordinación general programada para mañana a las 10:00 AM en la sede central.',
-      fecha: '2025-01-24',
-      hora: '10:00',
-      fechaCreacion: new Date('2025-01-23T14:30:00')
-    },
-    {
-      id: '2',
-      mensaje: 'Recordatorio: Entrega de materiales de campaña en los distritos 1, 2 y 3.',
-      fecha: '2025-01-23',
-      hora: '16:00',
-      fechaCreacion: new Date('2025-01-23T09:15:00')
-    },
-    {
-      id: '3',
-      mensaje: 'Evento público en la Plaza Principal. Se requiere apoyo de todos los coordinadores.',
-      fecha: '2025-01-25',
-      hora: '18:30',
-      fechaCreacion: new Date('2025-01-22T11:45:00')
-    }
-  ],
+  avisosCochabamba: [],
   
   territorialData: {},
 });
